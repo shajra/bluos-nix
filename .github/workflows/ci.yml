@@ -1,0 +1,17 @@
+name: "CI"
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cachix/install-nix-action@v13
+    - uses: cachix/cachix-action@v10
+      with:
+        name: shajra
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    - run: cat ~/.config/nix/nix.conf
+    - run: nix --print-build-logs build --file .
+    - run: nix path-info --file .

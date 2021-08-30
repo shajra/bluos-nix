@@ -1,0 +1,206 @@
+#+TITLE: Nix Build of BluOS Controller
+#+SETUPFILE: ./doc/links.org
+
+[[https://github.com/shajra/bluos-nix/actions][https://github.com/shajra/bluos-nix/workflows/CI/badge.svg]]
+
+* Org-mode setup :noexport:
+
+This document is written in a project-agnostic way so it can be copied to other
+projects that use Nix.
+
+** Formatting help
+
+This snippet can be used as a post-processing step to crop down the results from
+an evaluation of a source code block.
+
+#+NAME: crop
+#+BEGIN_SRC emacs-lisp :var text="" :var first-n=5 :var last-n=5 :results silent
+  (let* ((ls         (split-string text "\n"))
+         (first-ls   (-take first-n ls))
+         (rest-first (-drop first-n ls))
+         (rest-last  (-drop-last (+ 1 last-n) rest-first))
+         (last-ls    (-take-last (+ 1 last-n) rest-first)))
+    (string-join
+     (if rest-last
+         (append first-ls '("…") last-ls)
+       (append first-ls last-ls))
+     "\n"))
+#+END_SRC
+
+** Setup action
+
+The following helps (using Noweb) set up Nix environment variables for source
+block evaluation.
+
+#+NAME: nix-init
+#+BEGIN_SRC shell :eval no
+  export NIX_PROFILE=$(pwd)/nix-profile
+  export NIX_PAGER=cat
+  export PATH="$NIX_PROFILE/bin:$PATH"
+#+END_SRC
+
+Next we perform some side-effects to set up the evaluation of the whole
+document.
+
+#+NAME: cleanup
+#+BEGIN_SRC shell :results output silent :noweb yes
+  <<nix-init>>
+  rm --force result*
+  rm --force "$NIX_PROFILE"*
+#+END_SRC
+
+This is just a hack to deal with the fact that we never know what directory a
+session will start in, so we need a way to calculate the PWD to jump to it.
+
+#+NAME: pwd-parent
+#+BEGIN_SRC shell :results output silent
+  echo cd "$(pwd)"
+#+END_SRC
+
+This begins a session with environment variables initialized.
+
+#+NAME: session-init
+#+BEGIN_SRC shell :session env :results output silent :noweb yes
+  <<pwd-parent()>>
+  <<nix-init>>
+#+END_SRC
+
+* About this project
+
+This project provides a [[nix][Nix package manager]] expression to repackage the
+proprietary [[bluos][BluOS Controller]] for Linux. BluOS is software for managing
+digital/streaming music bundled with various music streamers and amplifiers.
+
+This project is very much unofficial. The official distribution is only for
+Windows, Macs, and mobile devices. However, it turns out that it's implemented
+as an [[electron][Electron]] application, which lends to portability, in this case enabled by
+some very light patching.
+
+This project is only tested against Linux and does not work on MacOS. Use the
+official BluOS distributions for MacOS or any other platform.
+
+Projects such as this one have been birthed by [[bluos-forum][a post on the official BluOS
+support forum]].  There's a few projects that do what this project does, but
+without Nix:
+
+- https://github.com/dave92082/bs-patch
+- https://github.com/frafra/bs-bashpatch
+
+Nix is a package manager we can use to build and install the controller. If
+you're new to Nix, see [[file:doc/nix.org][the provided documentation on Nix]] for more on what Nix
+is, why we're motivated to use it, and how to get set up with it for this
+project.
+
+You don't have to run NixOS to benefit from Nix. Nix can install alongside your
+Linux distribution's native package manager (APT, Yum, etc.) with no conflicts.
+
+Ultimately, we're trading off complexity. You take on the complexity of
+installing the Nix package manager (or running NixOS). After that projects like
+this can more easily build applications without you having to worry about having
+the right software installed and configured. All you need is Nix.
+
+* Nix setup
+
+To use Nix at all, you first need to have it on your system.
+
+#+INCLUDE: "doc/nix.org::*Nix package manager setup"
+
+* Installation
+
+Once you have Nix available as a package manager, you can then run the following
+to install the BluOS controller:
+
+#+BEGIN_SRC shell :eval no
+nix-env --install --file .
+#+END_SRC
+
+#+NAME: nix-env-install
+#+BEGIN_SRC shell :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
+nix-env --install --file . 2>&1
+#+END_SRC
+
+#+RESULTS: nix-env-install
+: installing 'bluos-controller'
+
+You should then see the controller installed at
+=~/.nix-profile/bin/bluos-controller=. For convenience, configure your shell to
+put =~/.nix-profile/bin= on your =PATH=.
+
+* Usage
+
+We generally start the controller with no arguments:
+
+#+BEGIN_SRC shell :eval no
+bluos-controller
+#+END_SRC
+
+Sometimes it gets a little stuck. If this happens, try hitting =ctrl-r= to reset
+the application. You can also type =Alt= to see the Electron menu (auto-hidden
+by default).
+
+The controller is wrapped by =daemon= as a convenience for job control. This way
+you can have confidence that only one instance is running at a time. Also, you
+don't have to deal with backgrounding threads and redirecting standard
+output/error.
+
+You can call the controller with =--help== or =--help-daemon= for more details.
+
+#+NAME: help
+#+BEGIN_SRC shell :session env :results output :exports both
+bluos-controller --help
+#+END_SRC
+
+#+RESULTS: help
+#+begin_example
+USAGE: bluos-controller [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
+
+DESCRIPTION:
+
+    Runs the BluOS Controller, ensuring that there's only
+    one instance running using a PID file.  This is done
+    with the 'daemon' program.
+
+    You can give a start or stop command.  Otherwise, start
+    is assumed.  If you give both commands, the last one has
+    precedence.
+
+OPTIONS:
+
+    -h --help            print this help message
+    -H --help-daemon     print this help message
+#+end_example
+
+* Release
+
+The "main" branch of the repository on GitHub has the latest released version
+of this code. There is currently no commitment to either forward or backward
+compatibility.
+
+"user/shajra" branches are personal branches that may be force-pushed to. The
+"main" branch should not experience force-pushes and is recommended for
+general use.
+
+* License
+
+This is repackaging of proprietary software. It is safe to assume that BluOS
+controls the terms for all copying, modification, and distribution. The
+copyright is entirely theirs. To my knowledge, there is no license for usage.
+
+Obviously, BluOS wants people to download their official software for use. But
+it's not clear to what degree they support unofficial repackaging. They could
+request projects like this to cease and desist. But the more likely scenario is
+that they are happy to have a community help out with something they don't have
+time for.
+
+An additional benefit to them is not having to support Linux officially. If any
+of these repackaging projects has a problem, the burden of a fix falls on the
+packager, and not on BluOS. That extends to damages and liabilities as well. But
+don't worry about that too much. The patching this project does is small.
+
+* Contribution
+
+Feel free to file issues and submit pull requests with GitHub.
+
+* Org-mode teardown :noexport:
+
+#+CALL: cleanup()
