@@ -60,7 +60,7 @@ Hopefully, this alleviates any worry about installing a complex program on your 
 
 If you don't already have Nix, [the official installation script](https://nixos.org/learn.html) should work on a variety of UNIX-like operating systems:
 
-```shell
+```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
@@ -76,7 +76,7 @@ It's recommended to configure Nix to use shajra.cachix.org as a Nix *substitutor
 
 You can configure shajra.cachix.org as a substitutor with the following command:
 
-```shell
+```sh
 nix run \
     --file https://cachix.org/api/v1/install \
     cachix \
@@ -105,7 +105,7 @@ Each of the Nix files in this project (files with a ".nix" extension) contains e
 
 Once you learn the Nix language, you can read these files to see what kind of values they build. We can use the `nix search` command to see what package derivations a Nix expression contains. For example from the root directory of this project, we can execute:
 
-```shell
+```sh
 nix search --file default.nix --no-cache
 ```
 
@@ -127,7 +127,7 @@ If the Nix expression we're searching evaluates to a single derivation (not in a
 
 Many Nix commands evaluate Nix files. If you specify a directory instead, the command will look for a `default.nix` file within to evaluate. So from the root directory of this project, we could use `.` instead of `default.nix`:
 
-```shell
+```sh
 nix search --file . --no-cache
 ```
 
@@ -144,7 +144,7 @@ We can see that a package named "bluos-controller" can be accessed with the `blu
 
 We can build this package with `nix build` from the project root:
 
-```shell
+```sh
 nix build --file . bluos-controller
 ```
 
@@ -154,7 +154,7 @@ All packages built by Nix are stored in `/nix/store`. Nix won't rebuild packages
 
 After a successful call of `nix build`, you'll see one or more symlinks for each package requested in the current working directory. These symlinks by default have a name prefixed with "result" and point back to the respective build in `/nix/store`:
 
-```shell
+```sh
 readlink result*
 ```
 
@@ -162,7 +162,7 @@ readlink result*
 
 Following these symlinks, we can see the files the project provides:
 
-```shell
+```sh
 tree -l result*
 ```
 
@@ -176,7 +176,7 @@ It's common to configure these "result" symlinks as ignored in source control to
 
 `nix build` has a `--no-link` switch in case you want to build packages without creating "result" symlinks. To get the paths where your packages are located, you can use `nix path-info` after a successful build:
 
-```shell
+```sh
 nix path-info --file . bluos-controller
 ```
 
@@ -190,7 +190,7 @@ With `nix run`, you don't even have to build the package first with `nix build` 
 
 For example, to get the help message for the `bluos-controller` executable provided by the `bluos-controller` package selected by the `bluos-controller` attribute path from `.`, we can call the following:
 
-```shell
+```sh
 nix run \
     --file . \
     bluos-controller \
@@ -218,7 +218,7 @@ We've seen that we can build programs with `nix build` and then execute them usi
 
 `nix-env` maintains a symlink tree, called a *profile*, of installed programs. The active profile is pointed to by a symlink at `~/.nix-profile`. By default, this profile points to `/nix/var/nix/profiles/per-user/$USER/profile`. But you can point your `~/.nix-profile` to any writable location with the `--switch-profile` switch:
 
-```shell
+```sh
 nix-env --switch-profile /nix/var/nix/profiles/per-user/$USER/another-profile
 ```
 
@@ -226,13 +226,13 @@ This way, you can just put `~/.nix-profile/bin` on your `PATH`, and any programs
 
 We can query what's installed in the active profile with the `--query` switch:
 
-```shell
+```sh
 nix-env --query
 ```
 
 To install the `bluos-controller` executable, which is accessed by the `bluos-controller` in our top-level `default.nix` file, we'd run the following:
 
-```shell
+```sh
 nix-env --install --file . --attr bluos-controller 2>&1
 ```
 
@@ -240,7 +240,7 @@ nix-env --install --file . --attr bluos-controller 2>&1
 
 We can see this installation by querying what's been installed:
 
-```shell
+```sh
 nix-env --query
 ```
 
@@ -248,13 +248,13 @@ nix-env --query
 
 And if we want to uninstall a program from our active profile, we do so by its name, in this case "bluos-controller":
 
-```shell
+```sh
 nix-env --uninstall bluos-controller 2>&1
 ```
 
     uninstalling 'bluos-controller'
 
-Note that we've installed our package using its attribute path (`bluos-controller`) within the referenced Nix expression. But we uninstall it using the package name ("bluos-controller"), which may or may not be the same as the attribute path. When a package is installed, Nix keeps no reference to the expression that evaluated to the derivation of the installed package. The attribute path is only relevant to this expression. In fact, two different expressions could evaluate to the exact same derivation, but use different attribute paths. This is why we uninstall packages by their package name.
+Note that we've installed our package using its attribute path (`bluos-controller`) within the referenced Nix expression. But we uninstall it using the package name ("bluos-controller"), which may or may not be the same as the attribute path. When a package is installed, Nix keeps no reference to the expression that evaluated to the derivation of the installed package. The attribute path is only relevant to this expression. In fact, two different expressions could evaluate to the same derivation, but use different attribute paths. This is why we uninstall packages by their package name.
 
 Also, if you look at the location for your profile, you'll see that Nix retains the symlink trees of previous generations of your profile. In fact you can even rollback to a previous profile with the `--rollback` switch. You can delete old generations of your profile with the `--delete-generations` switch.
 
@@ -293,7 +293,7 @@ Note that both `nix build` and `nix run` perform both instantiation and realizat
 
 However, you may encounter a Nix expression where `nix search` returns nothing, though you're sure that there are derivations to select out. In this case, the Nix expression is using an advanced technique that unfortunately hides attributes from `nix search` until some derivations are instantiated into `/nix/store`. We can force the instantiation of these derivations without realizing their packages with the following command:
 
-```shell
+```sh
 nix show-derivation --file default.nix
 ```
 

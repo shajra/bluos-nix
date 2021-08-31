@@ -9,15 +9,15 @@
         "year": "2021"
     },
     "nix-project": {
-        "branch": "master",
+        "branch": "main",
         "description": "Tools to manage a Nix-based project",
         "homepage": "",
         "owner": "shajra",
         "repo": "nix-project",
-        "rev": "6365bda5db789ca6fc42114dde3a82c16d0b3afd",
-        "sha256": "0m2dmx8251qm7mghhjb4rv2zcc0nsdq9f0hv7q0ls2d56iqqb9b4",
+        "rev": "546f682bdb18e19c2dd35aac953c0848b5fd295d",
+        "sha256": "1anwdb0njcvg20nlahhihnkjfk2h2jckbqdv1dhd9knw2c4mmazi",
         "type": "tarball",
-        "url": "https://github.com/shajra/nix-project/archive/6365bda5db789ca6fc42114dde3a82c16d0b3afd.tar.gz",
+        "url": "https://github.com/shajra/nix-project/archive/546f682bdb18e19c2dd35aac953c0848b5fd295d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {

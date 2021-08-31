@@ -33,36 +33,36 @@ The following helps (using Noweb) set up Nix environment variables for source
 block evaluation.
 
 #+NAME: nix-init
-#+BEGIN_SRC shell :eval no
-  export NIX_PROFILE=$(pwd)/nix-profile
-  export NIX_PAGER=cat
-  export PATH="$NIX_PROFILE/bin:$PATH"
+#+BEGIN_SRC sh :eval no
+export NIX_PROFILE=$(pwd)/nix-profile
+export NIX_PAGER=cat
+export PATH="$NIX_PROFILE/bin:$PATH"
 #+END_SRC
 
 Next we perform some side-effects to set up the evaluation of the whole
 document.
 
 #+NAME: cleanup
-#+BEGIN_SRC shell :results output silent :noweb yes
-  <<nix-init>>
-  rm --force result*
-  rm --force "$NIX_PROFILE"*
+#+BEGIN_SRC sh :results output silent :noweb yes
+<<nix-init>>
+rm --force result*
+rm --force "$NIX_PROFILE"*
 #+END_SRC
 
 This is just a hack to deal with the fact that we never know what directory a
 session will start in, so we need a way to calculate the PWD to jump to it.
 
 #+NAME: pwd-parent
-#+BEGIN_SRC shell :results output silent
-  echo cd "$(pwd)"
+#+BEGIN_SRC sh :results output silent
+echo cd "$(pwd)"
 #+END_SRC
 
 This begins a session with environment variables initialized.
 
 #+NAME: session-init
-#+BEGIN_SRC shell :session env :results output silent :noweb yes
-  <<pwd-parent()>>
-  <<nix-init>>
+#+BEGIN_SRC sh :session env :results output silent :noweb yes
+<<pwd-parent()>>
+<<nix-init>>
 #+END_SRC
 
 * About this project
@@ -71,28 +71,34 @@ This project provides a [[nix][Nix package manager]] expression to repackage the
 proprietary [[bluos][BluOS Controller]] for Linux. BluOS is software for managing
 digital/streaming music bundled with various music streamers and amplifiers.
 
-This project is very much unofficial. The official distribution is only for
-Windows, Macs, and mobile devices. However, it turns out that it's implemented
-as an [[electron][Electron]] application, which lends to portability, in this case enabled by
-some very light patching.
+This project is unofficial. The official distribution is only for Windows, Macs,
+and mobile devices. However, it turns out that it's implemented as an [[electron][Electron]]
+application, which lends to portability, in this case enabled by some relatively
+light patching.
 
 This project is only tested against Linux and does not work on MacOS. Use the
 official BluOS distributions for MacOS or any other platform.
 
 Projects such as this one have been birthed by [[bluos-forum][a post on the official BluOS
-support forum]].  There's a few projects that do what this project does, but
-without Nix:
+support forum]]. There's a few projects that do what this project does, but
+without Nix. Here's a comparison with two of them:
 
-- https://github.com/dave92082/bs-patch
-- https://github.com/frafra/bs-bashpatch
+| Project             | Dependencies                                   | Outputs        |
+|---------------------+------------------------------------------------+----------------|
+| [[https://github.com/dave92082/bs-patch][dave92082/bs-patch]]  | Go+NodeJS/NPM+P7ZIP                            | Snap, AppImage |
+| [[https://github.com/frafra/bs-bashpatch][frafra/bs-bashpatch]] | Go+P7ZIP+NodeJS/NPM+Lynx+… or Podman or Docker | AppImage       |
+| This project        | Nix package manager                            | Nix package    |
 
-Nix is a package manager we can use to build and install the controller. If
-you're new to Nix, see [[file:doc/nix.org][the provided documentation on Nix]] for more on what Nix
-is, why we're motivated to use it, and how to get set up with it for this
-project.
+Nix is a package manager we can use to both build and install the controller.
+NixOS is a distribution that uses this package manager, but we can install Nix
+on any Linux distribution. Nix can install with not worry of conflict alongside
+other package managers such as APT, Yum, Pacman, etc.
 
-You don't have to run NixOS to benefit from Nix. Nix can install alongside your
-Linux distribution's native package manager (APT, Yum, etc.) with no conflicts.
+A primary motivation to use Nix is to reduce build dependencies. This is not
+dissimilar from the optional usage of Podman or Docker of =bs-bashpatch=, but
+Nix offers an architecture for reproducible builds well above what Podman or
+Docker can accomplish. If you're new to Nix, see [[file:doc/nix.org][the provided documentation on
+Nix]] for more on what it is, and how to get set up with it for this project.
 
 Ultimately, we're trading off complexity. You take on the complexity of
 installing the Nix package manager (or running NixOS). After that projects like
@@ -110,12 +116,12 @@ To use Nix at all, you first need to have it on your system.
 Once you have Nix available as a package manager, you can then run the following
 to install the BluOS controller:
 
-#+BEGIN_SRC shell :eval no
+#+BEGIN_SRC sh :eval no
 nix-env --install --file .
 #+END_SRC
 
 #+NAME: nix-env-install
-#+BEGIN_SRC shell :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
+#+BEGIN_SRC sh :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
 nix-env --install --file . 2>&1
 #+END_SRC
 
@@ -130,7 +136,7 @@ put =~/.nix-profile/bin= on your =PATH=.
 
 We generally start the controller with no arguments:
 
-#+BEGIN_SRC shell :eval no
+#+BEGIN_SRC sh :eval no
 bluos-controller
 #+END_SRC
 
@@ -140,13 +146,13 @@ by default).
 
 The controller is wrapped by =daemon= as a convenience for job control. This way
 you can have confidence that only one instance is running at a time. Also, you
-don't have to deal with backgrounding threads and redirecting standard
+don't have to deal with backgrounding processes or redirecting standard
 output/error.
 
-You can call the controller with =--help== or =--help-daemon= for more details.
+You can call the controller with =--help= or =--help-daemon= for more details:
 
 #+NAME: help
-#+BEGIN_SRC shell :session env :results output :exports both
+#+BEGIN_SRC sh :session env :results output :exports both
 bluos-controller --help
 #+END_SRC
 
@@ -193,9 +199,11 @@ that they are happy to have a community help out with something they don't have
 time for.
 
 An additional benefit to them is not having to support Linux officially. If any
-of these repackaging projects has a problem, the burden of a fix falls on the
-packager, and not on BluOS. That extends to damages and liabilities as well. But
-don't worry about that too much. The patching this project does is small.
+of these repackaging projects has a problem, the burden of fixing it falls on
+the packager, and not on BluOS. That extends to damages and liabilities as well.
+But don't worry about that too much. The patching this project does is small,
+and it's ultimately just a music management application that talks a little over
+the network.
 
 * Contribution
 

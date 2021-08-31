@@ -4,26 +4,19 @@ cd "$(dirname "$0")/.."
 
 nix run \
     --ignore-environment \
-    --keep HOME \
     --keep LANG \
     --keep LOCALE_ARCHIVE \
     --file nix \
     nix-project-org2gfm \
     ansifilter \
-    bash \
     coreutils \
-    direnv \
-    findutils \
-    git \
     gnugrep \
-    gnutar \
-    gzip \
-    stack \
     tree \
-    which \
     --command \
     org2gfm \
-    --ignore 'links.org\|home-fake\|nix.mac.org' \
+    --path-bin \
+    --exclude links.org \
+    --exclude nix.mac.org \
     --nix "$(command -v nix)" \
     --evaluate \
     "$@"
