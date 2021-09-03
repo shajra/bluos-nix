@@ -158,7 +158,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/k4ffqrcsjb1d5779q1s50mfvgm6kyy5l-bluos-controller
+    /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -180,7 +180,7 @@ It's common to configure these "result" symlinks as ignored in source control to
 nix path-info --file . bluos-controller
 ```
 
-    /nix/store/k4ffqrcsjb1d5779q1s50mfvgm6kyy5l-bluos-controller
+    /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
 
 ## Running commands<a id="sec-6-3"></a>
 

@@ -1,3 +1,1 @@
-with (import ./nix {});
-
-{ inherit bluos-controller; }
+(import ./nix {}).bluos-controller-dist

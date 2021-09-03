@@ -9,7 +9,9 @@ let
         config = {};
         overlays = [
             (self: super: import external.nix-project)
-            (self: super: { bluos-controller = app; })
+            (self: super: {
+                bluos-controller-dist.bluos-controller = app;
+            })
         ];
     };
 
