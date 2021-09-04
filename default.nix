@@ -1,1 +1,1 @@
-(import ./nix {}).bluos-controller-dist
+(import ./nix {}).distribution

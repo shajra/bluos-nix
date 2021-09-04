@@ -5,14 +5,11 @@ let
 
     external = import ./external // externalOverrides;
 
+    nix-project = import external.nix-project;
+
     nixpkgs = import external.nixpkgs {
         config = {};
-        overlays = [
-            (self: super: import external.nix-project)
-            (self: super: {
-                bluos-controller-dist.bluos-controller = app;
-            })
-        ];
+        overlays = [(self: super: nix-project)];
     };
 
     src = external."bluos-controller.dmg";
@@ -59,10 +56,12 @@ let
     unasar-patched = unasar [ ./patch ];
     unasar-unpatched = unasar [];
 
-    app = nixpkgs.callPackage ./wrapper.nix {
+    bluos-controller = nixpkgs.callPackage ./wrapper.nix {
         inherit pname meta unasar-patched;
     };
 
+    distribution = { inherit bluos-controller; };
+
 # DESIGN: can be useful for regenerating the patch file
 #in { inherit app unasar-patched unasar-unpatched; }
-in nixpkgs
+in { inherit distribution nix-project nixpkgs; }
