@@ -1,5 +1,5 @@
-#+TITLE: Nix Build of BluOS Controller
-#+SETUPFILE: ./doc/links.org
+#+title: Nix Build of BluOS Controller
+#+setupfile: ./doc/links.org
 
 [[https://github.com/shajra/bluos-nix/actions][https://github.com/shajra/bluos-nix/workflows/CI/badge.svg]]
 
@@ -13,8 +13,8 @@ projects that use Nix.
 This snippet can be used as a post-processing step to crop down the results from
 an evaluation of a source code block.
 
-#+NAME: crop
-#+BEGIN_SRC emacs-lisp :var text="" :var first-n=5 :var last-n=5 :results silent
+#+name: crop
+#+begin_src emacs-lisp :var text="" :var first-n=5 :var last-n=5 :results silent
 (let* ((ls         (split-string text "\n"))
        (first-ls   (-take first-n ls))
        (rest-first (-drop first-n ls))
@@ -25,45 +25,45 @@ an evaluation of a source code block.
        (append first-ls '("…") last-ls)
      (append first-ls last-ls))
    "\n"))
-#+END_SRC
+#+end_src
 
 ** Setup action
 
 The following helps (using Noweb) set up Nix environment variables for source
 block evaluation.
 
-#+NAME: nix-init
-#+BEGIN_SRC sh :eval no
+#+name: nix-init
+#+begin_src sh :eval no
 export NIX_PROFILE=$(pwd)/nix-profile
 export NIX_PAGER=cat
 export PATH="$NIX_PROFILE/bin:$PATH"
-#+END_SRC
+#+end_src
 
 Next we perform some side-effects to set up the evaluation of the whole
 document.
 
-#+NAME: cleanup
-#+BEGIN_SRC sh :results output silent :noweb yes
+#+name: cleanup
+#+begin_src sh :results output silent :noweb yes
 <<nix-init>>
 rm --force result*
 rm --force "$NIX_PROFILE"*
-#+END_SRC
+#+end_src
 
 This is just a hack to deal with the fact that we never know what directory a
 session will start in, so we need a way to calculate the PWD to jump to it.
 
-#+NAME: pwd-parent
-#+BEGIN_SRC sh :results output silent
+#+name: pwd-parent
+#+begin_src sh :results output silent
 echo cd "$(pwd)"
-#+END_SRC
+#+end_src
 
 This begins a session with environment variables initialized.
 
-#+NAME: session-init
-#+BEGIN_SRC sh :session env :results output silent :noweb yes
+#+name: session-init
+#+begin_src sh :session env :results output silent :noweb yes
 <<pwd-parent()>>
 <<nix-init>>
-#+END_SRC
+#+end_src
 
 * About this project
 
@@ -109,23 +109,23 @@ the right software installed and configured. All you need is Nix.
 
 To use Nix at all, you first need to have it on your system.
 
-#+INCLUDE: "doc/nix.org::*Nix package manager setup"
+#+include: "doc/nix.org::*Nix package manager setup"
 
 * Installation
 
 Once you have Nix available as a package manager, you can then run the following
 to install the BluOS controller:
 
-#+BEGIN_SRC sh :eval no
+#+begin_src sh :eval no
 nix-env --install --file .
-#+END_SRC
+#+end_src
 
-#+NAME: nix-env-install
-#+BEGIN_SRC sh :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
+#+name: nix-env-install
+#+begin_src sh :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
 nix-env --install --file . 2>&1
-#+END_SRC
+#+end_src
 
-#+RESULTS: nix-env-install
+#+results: nix-env-install
 : installing 'bluos-controller'
 
 You should then see the controller installed at
@@ -136,9 +136,9 @@ put =~/.nix-profile/bin= on your =PATH=.
 
 We generally start the controller with no arguments:
 
-#+BEGIN_SRC sh :eval no
+#+begin_src sh :eval no
 bluos-controller
-#+END_SRC
+#+end_src
 
 Sometimes it gets a little stuck. If this happens, try hitting =ctrl-r= to reset
 the application. You can also type =Alt= to see the Electron menu (auto-hidden
@@ -151,12 +151,12 @@ output/error.
 
 You can call the controller with =--help= or =--help-daemon= for more details:
 
-#+NAME: help
-#+BEGIN_SRC sh :session env :results output :exports both
+#+name: help
+#+begin_src sh :session env :results output :exports both
 bluos-controller --help
-#+END_SRC
+#+end_src
 
-#+RESULTS: help
+#+results: help
 #+begin_example
 USAGE: bluos-controller [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
 
@@ -211,4 +211,4 @@ Feel free to file issues and submit pull requests with GitHub.
 
 * Org-mode teardown :noexport:
 
-#+CALL: cleanup()
+#+call: cleanup()
