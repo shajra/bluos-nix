@@ -277,7 +277,7 @@ nix search --file default.nix --no-cache | ansifilter
 
 #+results: nix-search
 : * bluos-controller (bluos-controller)
-:   BluOS Controller 3.14.0 (non-free)
+:   BluOS Controller 3.14.1 (non-free)
 : 
 
 If you don't get the results above, see the [[#nix-drv][section on understanding derivations]]
@@ -333,7 +333,7 @@ nix search --no-cache --file . | ansifilter \
 
 #+results: nix-search-specific
 : * bluos-controller (bluos-controller)
-:   BluOS Controller 3.14.0 (non-free)
+:   BluOS Controller 3.14.1 (non-free)
 
 We can see that a package named {{{package-name}}} can be accessed with the
 {{{package-attr}}} attribute path in the Nix expression in the project root's
@@ -366,7 +366,7 @@ readlink result*
 #+end_src
 
 #+results: nix-build-link
-: /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
+: /nix/store/yxv38nns8ibbc9m1wd5lqdpv51c2mmvr-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -395,7 +395,7 @@ nix path-info --file . <<get("package-attr")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
+: /nix/store/yxv38nns8ibbc9m1wd5lqdpv51c2mmvr-bluos-controller
 
 ** Running commands
 
@@ -420,11 +420,11 @@ nix run \
 #+end_src
 
 #+results: nix-run
-: USAGE: bluos-controller [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
+: USAGE: bluos-controller
+:     [OPTIONS]... [start | start-nodaemon | stop | toggle] [-- DAEMON_ARGS...]
 : 
 : DESCRIPTION:
 : 
-:     Runs the BluOS Controller, ensuring that there's only
 : …
 
 Thus far, the argument of the =--file= switch has always referenced a Nix file

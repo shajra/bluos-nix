@@ -32,7 +32,8 @@ ARGS=()
 print_usage()
 {
     cat - <<EOF
-USAGE: ${pname} [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
+USAGE: ${pname}
+    [OPTIONS]... [start | start-nodaemon | stop | toggle] [-- DAEMON_ARGS...]
 
 DESCRIPTION:
 
@@ -68,6 +69,9 @@ main()
         --start|start)
             COMMAND=start
             ;;
+        --start-nodaemon|start-nodaemon)
+            COMMAND=start-nodaemon
+            ;;
         --stop|stop)
             COMMAND=stop
             ;;
@@ -84,15 +88,21 @@ main()
         shift
     done
     case "$COMMAND" in
-    start)  start_controller ;;
-    stop)   stop_controller  ;;
-    toggle) toggle_controller  ;;
+    start)          start_controller          ;;
+    start-nodaemon) start_nodaemon_controller ;;
+    stop)           stop_controller           ;;
+    toggle)         toggle_controller         ;;
     esac
 }
 
 start_controller()
 {
     daemon "''${ARGS[@]}" --name "$DAEMON_NAME" -- electron "${unasar-patched}"
+}
+
+start_nodaemon_controller()
+{
+    electron "${unasar-patched}"
 }
 
 stop_controller()

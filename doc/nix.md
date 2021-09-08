@@ -110,7 +110,7 @@ nix search --file default.nix --no-cache
 ```
 
     * bluos-controller (bluos-controller)
-      BluOS Controller 3.14.0 (non-free)
+      BluOS Controller 3.14.1 (non-free)
 
 If you don't get the results above, see the [section on understanding derivations](#nix-drv) for an explanation of a likely problem and workaround.
 
@@ -138,7 +138,7 @@ In the remainder of this document, we'll use `.` instead of `default.nix` since 
 The following result is one returned by our prior execution of `nix search --no-cache --file .`:
 
     * bluos-controller (bluos-controller)
-      BluOS Controller 3.14.0 (non-free)
+      BluOS Controller 3.14.1 (non-free)
 
 We can see that a package named "bluos-controller" can be accessed with the `bluos-controller` attribute path in the Nix expression in the project root's `default.nix`. Not shown in the search results above, this package happens to provide the executable `bluos-controller`.
 
@@ -158,7 +158,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
+    /nix/store/yxv38nns8ibbc9m1wd5lqdpv51c2mmvr-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -180,7 +180,7 @@ It's common to configure these "result" symlinks as ignored in source control to
 nix path-info --file . bluos-controller
 ```
 
-    /nix/store/ydgp2hpv1lxyi16raraj7c4mkxc9dd8k-bluos-controller
+    /nix/store/yxv38nns8ibbc9m1wd5lqdpv51c2mmvr-bluos-controller
 
 ## Running commands<a id="sec-6-3"></a>
 
@@ -197,11 +197,11 @@ nix run \
     --command bluos-controller --help
 ```
 
-    USAGE: bluos-controller [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
+    USAGE: bluos-controller
+        [OPTIONS]... [start | start-nodaemon | stop | toggle] [-- DAEMON_ARGS...]
     
     DESCRIPTION:
     
-        Runs the BluOS Controller, ensuring that there's only
     …
 
 Thus far, the argument of the `--file` switch has always referenced a Nix file on our local filesystem. However, it's possible to reference a Nix expression downloaded from the internet. The Nix ecosystem is supported by a giant GitHub repository of Nix expressions called [Nixpkgs](https://github.com/NixOS/nixpkgs). Special branches of this repository are considered *channels* in the Nix ecosystem. A Nixpkgs branch of "nixos-21.05" can be referenced by "channel:nixos-21.05" for `nix` subcommands that accept a `--file` switch.

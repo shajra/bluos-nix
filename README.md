@@ -13,6 +13,8 @@
 
 This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
 
+The "main" branch provides the latest release of 3.14.1 of the controller. See "maint/\*" branches for older versions.
+
 This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability, in this case enabled by some relatively light patching.
 
 This project is only tested against Linux and does not work on MacOS. Use the official BluOS distributions for MacOS or any other platform.
@@ -81,7 +83,8 @@ You can call the controller with `--help` or `--help-daemon` for more details:
 bluos-controller --help
 ```
 
-    USAGE: bluos-controller [OPTIONS]... [start | stop | toggle] [-- DAEMON_ARGS...]
+    USAGE: bluos-controller
+        [OPTIONS]... [start | start-nodaemon | stop | toggle] [-- DAEMON_ARGS...]
     
     DESCRIPTION:
     
@@ -101,6 +104,8 @@ bluos-controller --help
 # Release<a id="sec-5"></a>
 
 The "main" branch of the repository on GitHub has the latest released version of this code. There is currently no commitment to either forward or backward compatibility.
+
+The "maint/\*" branches have older versions of BluOS controller. There might be a motivation to run with an older version intentionally, despite the nagging to upgrade.
 
 "user/shajra" branches are personal branches that may be force-pushed to. The "main" branch should not experience force-pushes and is recommended for general use.
 

@@ -14,7 +14,7 @@ let
 
     src = external."bluos-controller.dmg";
     pname = "bluos-controller";
-    version = "3.14.0";
+    version = "3.14.1";
     name = "${pname}-${version}";
 
     meta.description = "BluOS Controller ${version} (non-free)";
@@ -42,7 +42,13 @@ let
             asar
             js-beautify
         ];
-        phases = ["unpackPhase" "patchPhase" "installPhase"];
+        phases = ["unpackPhase" "patchPhase" "postPhase" "installPhase"];
+        postPhase = ''
+            substituteInPlace common/analyticsServer.js \
+                --replace \
+                'process.resourcesPath' \
+                '"${undmg}/Resources"'
+        '';
         unpackPhase = ''
             asar extract "$src/Resources/app.asar" .
             js-beautify -r www/app.js
@@ -63,5 +69,5 @@ let
     distribution = { inherit bluos-controller; };
 
 # DESIGN: can be useful for regenerating the patch file
-#in { inherit app unasar-patched unasar-unpatched; }
+#in { inherit undmg unasar-unpatched; }
 in { inherit distribution nix-project nixpkgs; }

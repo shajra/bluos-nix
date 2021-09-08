@@ -1,11 +1,11 @@
 {
     "bluos-controller.dmg": {
-        "month": "04",
-        "sha256": "0f93jpvv1ggbzx8sxrngbjv947pvs9dkkp4jq0a9xim21macjvz7",
+        "month": "09",
+        "sha256": "0fsf9sb7vwakdsgibyyc82hpr9y180k3i7swdxwgrz9vx8bxskka",
         "type": "file",
-        "url": "https://www.bluesound.com/wp-content/uploads/2021/04/BluOS-Controller-3.14.0.dmg",
+        "url": "https://www.bluesound.com/wp-content/uploads/2021/09/BluOS-Controller-3.14.1.dmg",
         "url_template": "https://www.bluesound.com/wp-content/uploads/<year>/<month>/BluOS-Controller-<version>.dmg",
-        "version": "3.14.0",
+        "version": "3.14.1",
         "year": "2021"
     },
     "nix-project": {
@@ -14,10 +14,10 @@
         "homepage": "",
         "owner": "shajra",
         "repo": "nix-project",
-        "rev": "222071fa4b2d6459d7ad799e8b6f7c7c11cb1160",
-        "sha256": "0fxzf2m8s67xlanjwlp6rwyhf48r3szqidazs1i9sxjmxmf19l4a",
+        "rev": "2463447a88323a627ca0bc5c5e542b65370177e7",
+        "sha256": "1qgsnm9pw2xcw2qh4hdrjqwfkfpmh8rzimjh0ak5iy210ipqfq3a",
         "type": "tarball",
-        "url": "https://github.com/shajra/nix-project/archive/222071fa4b2d6459d7ad799e8b6f7c7c11cb1160.tar.gz",
+        "url": "https://github.com/shajra/nix-project/archive/2463447a88323a627ca0bc5c5e542b65370177e7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -26,10 +26,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "110a2c9ebbf5d4a94486854f18a37a938cfacbbb",
-        "sha256": "0v12ylqxy1kl06dgln6h5k8vhlfzp8xvdymljj7bl0avr0nrgrcm",
+        "rev": "fd6dba47199a7c249e64c1aa1fef01ee78e58481",
+        "sha256": "0a9njyymwpz9xjq7vbyz91kxv9gf1rfww0xx7rj191ahppzgwv6b",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/110a2c9ebbf5d4a94486854f18a37a938cfacbbb.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/fd6dba47199a7c249e64c1aa1fef01ee78e58481.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
