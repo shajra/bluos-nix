@@ -47,15 +47,17 @@ let
             substituteInPlace common/analyticsServer.js \
                 --replace \
                 'process.resourcesPath' \
-                '"${undmg}/Resources"'
+                "\"$out/resources\""
         '';
         unpackPhase = ''
             asar extract "$src/Resources/app.asar" .
             js-beautify -r www/app.js
         '';
         installPhase = ''
-            mkdir "$out"
+            mkdir --parents "$out"
             cp -r . "$out"
+            mkdir --parents "$out/resources"
+            cp -r "$src/Resources/analytics" "$out/resources"
         '';
     };
 
