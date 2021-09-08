@@ -26,6 +26,7 @@ set -o pipefail
 
 COMMAND=start
 DAEMON_NAME=blue_controller
+SCALE=1
 ARGS=()
 
 
@@ -49,6 +50,7 @@ OPTIONS:
 
     -h --help            print this help message
     -H --help-daemon     print this help message
+    -s --scale           DPI scaling factor
 
 EOF
 }
@@ -65,6 +67,13 @@ main()
         -H|--help-daemon)
             daemon --help
             exit 0
+            ;;
+        -s|--scale)
+            if [ -z "''${2:-}" ]
+            then die "$1 requires an numeric argument"
+            fi
+            SCALE="''${2:-}"
+            shift
             ;;
         --start|start)
             COMMAND=start
@@ -97,12 +106,13 @@ main()
 
 start_controller()
 {
-    daemon "''${ARGS[@]}" --name "$DAEMON_NAME" -- electron "${unasar-patched}"
+    daemon "''${ARGS[@]}" --name "$DAEMON_NAME" -- \
+        electron --force-device-scale-factor="$SCALE" "${unasar-patched}"
 }
 
 start_nodaemon_controller()
 {
-    electron "${unasar-patched}"
+    electron --force-device-scale-factor="$SCALE" "${unasar-patched}"
 }
 
 stop_controller()
@@ -116,6 +126,15 @@ toggle_controller()
     then stop_controller
     else start_controller
     fi
+}
+
+die()
+{
+    {
+    print_usage
+    echo
+    echo "ERROR: $1"
+    } >&2
 }
 
 
