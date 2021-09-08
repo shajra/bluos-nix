@@ -72,7 +72,7 @@ proprietary [[bluos][BluOS Controller]] for Linux. BluOS is software for managin
 digital/streaming music bundled with various music streamers and amplifiers.
 
 The "main" branch provides the latest release of 3.14.1 of the controller. See
-"maint/*" branches for older versions.
+"old/*" branches for older versions.
 
 This project is unofficial. The official distribution is only for Windows, Macs,
 and mobile devices. However, it turns out that it's implemented as an [[electron][Electron]]
@@ -178,6 +178,7 @@ OPTIONS:
 
     -h --help            print this help message
     -H --help-daemon     print this help message
+    -s --scale           DPI scaling factor
 #+end_example
 
 * Release
@@ -186,7 +187,7 @@ The "main" branch of the repository on GitHub has the latest released version of
 this code. There is currently no commitment to either forward or backward
 compatibility.
 
-The "maint/*" branches have older versions of BluOS controller. There might be a
+The "old/*" branches have older versions of BluOS controller. There might be a
 motivation to run with an older version intentionally, despite the nagging to
 upgrade.
 
