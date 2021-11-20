@@ -8,7 +8,9 @@ let
     nix-project = import external.nix-project;
 
     nixpkgs = import external.nixpkgs {
-        config = {};
+        config = {
+            permittedInsecurePackages = [ "electron-9.4.4" ];
+        };
         overlays = [(self: super: nix-project)];
     };
 

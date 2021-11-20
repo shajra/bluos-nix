@@ -366,7 +366,7 @@ readlink result*
 #+end_src
 
 #+results: nix-build-link
-: /nix/store/19mqpk3npnvplhs983gpysb2sb6zgk5w-bluos-controller
+: /nix/store/9q4bm9s3lz1fdqbnka55dz1pcl3p2p5x-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -395,7 +395,7 @@ nix path-info --file . <<get("package-attr")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/19mqpk3npnvplhs983gpysb2sb6zgk5w-bluos-controller
+: /nix/store/9q4bm9s3lz1fdqbnka55dz1pcl3p2p5x-bluos-controller
 
 ** Running commands
 
