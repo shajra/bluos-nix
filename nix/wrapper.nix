@@ -1,32 +1,45 @@
-{ coreutils
+{ bc
+, bluos-controller-unasar-patched
+, coreutils
 , daemon
 , electron_9
+, lib
 , nix-project-lib
-, pname
-, meta
-, unasar-patched
+}:
+{ pname
+, version
 }:
 
-nix-project-lib.writeShellCheckedExe pname
+let
+
+    meta.description = "BluOS Controller ${version} (non-free)";
+    meta.platforms = lib.platforms.linux;
+    app = bluos-controller-unasar-patched;
+
+in nix-project-lib.writeShellCheckedExe pname
 {
     inherit meta;
     path = [
+        bc
         coreutils
         daemon
         electron_9
     ];
+    pathPure = false;
 }
 ''
 set -eu
 set -o pipefail
 
 
-. "${nix-project-lib.common}/share/nix-project/common.bash"
+. "${nix-project-lib.scriptCommon}/share/nix-project/common.bash"
 
 
 COMMAND=start
 DAEMON_NAME=blue_controller
-SCALE=1
+SCALE="$(
+    { echo "scale=1; $(xrdb -get dpi) / 115" | bc; } || echo 1
+)"
 ARGS=()
 
 
@@ -107,12 +120,12 @@ main()
 start_controller()
 {
     daemon "''${ARGS[@]}" --name "$DAEMON_NAME" -- \
-        electron --force-device-scale-factor="$SCALE" "${unasar-patched}"
+        electron --force-device-scale-factor="$SCALE" "${app}"
 }
 
 start_nodaemon_controller()
 {
-    electron --force-device-scale-factor="$SCALE" "${unasar-patched}"
+    electron --force-device-scale-factor="$SCALE" "${app}"
 }
 
 stop_controller()

@@ -1,11 +1,9 @@
 - [About this project](#sec-1)
-- [Nix setup](#sec-2)
-  - [Nix package manager setup](#sec-2-1)
-- [Installation](#sec-3)
-- [Usage](#sec-4)
-- [Release](#sec-5)
-- [License](#sec-6)
-- [Contribution](#sec-7)
+- [Building, packaging, and distributing with Nix](#sec-2)
+- [Usage](#sec-3)
+- [Release](#sec-4)
+- [License](#sec-5)
+- [Contribution](#sec-6)
 
 [![img](https://github.com/shajra/bluos-nix/workflows/CI/badge.svg)](https://github.com/shajra/bluos-nix/actions)
 
@@ -13,65 +11,45 @@
 
 This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
 
-The "main" branch provides the latest release of 3.14.1 of the controller. See "old/\*" branches for older versions.
+The "main" branch provides the latest release of 3.20.5 of the controller. See "old/\*" branches for older versions.
 
 This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability, in this case enabled by some relatively light patching.
 
 This project is only tested against Linux and does not work on MacOS. Use the official BluOS distributions for MacOS or any other platform.
 
+# Building, packaging, and distributing with Nix<a id="sec-2"></a>
+
 Projects such as this one have been birthed by [a post on the official BluOS support forum](https://support1.bluesound.com/hc/en-us/community/posts/360033533054-BluOS-controller-app-on-Linux). There's a few projects that do what this project does, but without Nix. Here's a comparison with two of them:
 
-| Project                                                       | Dependencies                                   | Outputs        |
-|------------------------------------------------------------- |---------------------------------------------- |-------------- |
-| [dave92082/bs-patch](https://github.com/dave92082/bs-patch)   | Go+NodeJS/NPM+P7ZIP                            | Snap, AppImage |
-| [frafra/bs-bashpatch](https://github.com/frafra/bs-bashpatch) | Go+P7ZIP+NodeJS/NPM+Lynx+… or Podman or Docker | AppImage       |
-| This project                                                  | Nix package manager                            | Nix package    |
+| Project                                                                                                     | Dependencies                                   | Outputs        |
+|----------------------------------------------------------------------------------------------------------- |---------------------------------------------- |-------------- |
+| [dave92082/bs-patch](https://github.com/dave92082/bs-patch)                                                 | Go+NodeJS/NPM+P7ZIP                            | Snap, AppImage |
+| [frafra/bs-bashpatch](https://github.com/frafra/bs-bashpatch)                                               | Go+P7ZIP+NodeJS/NPM+Lynx+… or Podman or Docker | AppImage       |
+| [fabrice.aeschbacher/bluos-controller-linux](https://gitlab.com/fabrice.aeschbacher/bluos-controller-linux) | P7ZIP+NodeJS/NPM+…                             | AppImage       |
+| This project                                                                                                | Nix package manager                            | Nix package    |
 
 Nix is a package manager we can use to both build and install the controller. NixOS is a distribution that uses this package manager, but we can install Nix on any Linux distribution. Nix can install with not worry of conflict alongside other package managers such as APT, Yum, Pacman, etc.
 
-A primary motivation to use Nix is to reduce build dependencies. This is not dissimilar from the optional usage of Podman or Docker of `bs-bashpatch`, but Nix offers an architecture for reproducible builds well above what Podman or Docker can accomplish. If you're new to Nix, see [the provided documentation on Nix](doc/nix.md) for more on what it is, and how to get set up with it for this project.
+A primary motivation to use Nix is to reduce build dependencies. This is not dissimilar from the optional usage of Podman or Docker of `bs-bashpatch`, but Nix offers an architecture for reproducible builds well above what Podman or Docker can accomplish. If you're new to Nix this project bundles a few guides to get you started:
+
+-   [Introduction to Nix and motivations to use it](doc/nix-introduction.md)
+-   [Nix installation and configuration guide](doc/nix-installation.md)
+-   [Nix end user guide](doc/nix-usage-flakes.md)
+-   [Introduction to the Nix programming language](doc/nix-language.md)
 
 Ultimately, we're trading off complexity. You take on the complexity of installing the Nix package manager (or running NixOS). After that projects like this can more easily build applications without you having to worry about having the right software installed and configured. All you need is Nix.
 
-# Nix setup<a id="sec-2"></a>
+# Usage<a id="sec-3"></a>
 
-To use Nix at all, you first need to have it on your system.
-
-## Nix package manager setup<a id="sec-2-1"></a>
-
-> **<span class="underline">NOTE:</span>** You don't need this step if you're running NixOS, which comes with Nix baked in.
-
-If you don't already have Nix, [the official installation script](https://nixos.org/learn.html) should work on a variety of UNIX-like operating systems:
-
-```bash
-sh <(curl -L https://nixos.org/nix/install) --daemon
-```
-
-After installation, you may have to exit your terminal session and log back in to have environment variables configured to put Nix executables on your `PATH`.
-
-The `--daemon` switch installs Nix in the recommended multi-user mode. This requires the script to run commands with `sudo`. The script fairly verbosely reports everything it does and touches. If you later want to uninstall Nix, you can run the installation script again, and it will tell you what to do to get back to a clean state.
-
-The Nix manual describes [other methods of installing Nix](https://nixos.org/nix/manual/#chap-installation) that may suit you more.
-
-# Installation<a id="sec-3"></a>
-
-Once you have Nix available as a package manager, you can then run the following to install the BluOS controller:
+As discussed in the [end user guide](doc/nix-usage-flakes.md) after [installing Nix](doc/nix-installation.md), we can run the BluOS controller without even installing it:
 
 ```sh
-nix-env --install --file .
+nix run github:shajra/bluos-controller
 ```
 
-    installing 'bluos-controller'
+The guide also discusses how to install the application so it's accessible from your `PATH`.
 
-You should then see the controller installed at `~/.nix-profile/bin/bluos-controller`. For convenience, configure your shell to put `~/.nix-profile/bin` on your `PATH`.
-
-# Usage<a id="sec-4"></a>
-
-We generally start the controller with no arguments:
-
-```sh
-bluos-controller
-```
+We generally start the controller with no arguments.
 
 Sometimes it gets a little stuck. If this happens, try hitting `ctrl-r` to reset the application. You can also type `Alt` to see the Electron menu (auto-hidden by default).
 
@@ -102,7 +80,7 @@ bluos-controller --help
         -H --help-daemon     print this help message
         -s --scale           DPI scaling factor
 
-# Release<a id="sec-5"></a>
+# Release<a id="sec-4"></a>
 
 The "main" branch of the repository on GitHub has the latest released version of this code. There is currently no commitment to either forward or backward compatibility.
 
@@ -110,7 +88,7 @@ The "old/\*" branches have older versions of BluOS controller. There might be a 
 
 "user/shajra" branches are personal branches that may be force-pushed to. The "main" branch should not experience force-pushes and is recommended for general use.
 
-# License<a id="sec-6"></a>
+# License<a id="sec-5"></a>
 
 This is repackaging of proprietary software. It is safe to assume that BluOS controls the terms for all copying, modification, and distribution. The copyright is entirely theirs. To my knowledge, there is no license for usage.
 
@@ -118,6 +96,6 @@ Obviously, BluOS wants people to download their official software for use. But i
 
 An additional benefit to them is not having to support Linux officially. If any of these repackaging projects has a problem, the burden of fixing it falls on the packager, and not on BluOS. That extends to damages and liabilities as well. But don't worry about that too much. The patching this project does is small, and it's ultimately just a music management application that talks a little over the network.
 
-# Contribution<a id="sec-7"></a>
+# Contribution<a id="sec-6"></a>
 
 Feel free to file issues and submit pull requests with GitHub.

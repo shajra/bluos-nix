@@ -1,0 +1,30 @@
+diff --git a/common/mainWindow.js b/common/mainWindow.js
+index 091188c..32b80a9 100644
+--- a/common/mainWindow.js
++++ b/common/mainWindow.js
+@@ -28,6 +28,7 @@ class MainWindow {
+       minHeight: 480,
+       backgroundColor: "#111",
+       show: false,
++      icon: path.join(__dirname, "..", "www",  "img", "icon.png"),
+       webPreferences: {
+         contextIsolation: true,
+         nodeIntegration: true, // https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content
+diff --git a/package.json b/package.json
+index c3c50bd..26082ea 100644
+--- a/package.json
++++ b/package.json
+@@ -14,5 +14,12 @@
+     "http-terminator": "^3.2.0",
+     "sanitize-filename": "^1.6.3",
+     "sudo-prompt": "^9.2.1"
++  },
++  "devDependencies": {
++    "electron-builder": "^19"
++  },
++  "build": {
++    "appId": "com.bluos.app",
++    "extraResources": [ { "from": "resources", "to": ".", "filter": [ "**/*" ] } ]
+   }
+ }
+\ No newline at end of file

@@ -1,69 +1,7 @@
 #+title: Nix Build of BluOS Controller
-#+setupfile: ./doc/links.org
+#+setupfile: ./doc/internal/links.org
 
 [[https://github.com/shajra/bluos-nix/actions][https://github.com/shajra/bluos-nix/workflows/CI/badge.svg]]
-
-* Org-mode setup :noexport:
-
-This document is written in a project-agnostic way so it can be copied to other
-projects that use Nix.
-
-** Formatting help
-
-This snippet can be used as a post-processing step to crop down the results from
-an evaluation of a source code block.
-
-#+name: crop
-#+begin_src emacs-lisp :var text="" :var first-n=5 :var last-n=5 :results silent
-(let* ((ls         (split-string text "\n"))
-       (first-ls   (-take first-n ls))
-       (rest-first (-drop first-n ls))
-       (rest-last  (-drop-last (+ 1 last-n) rest-first))
-       (last-ls    (-take-last (+ 1 last-n) rest-first)))
-  (string-join
-   (if rest-last
-       (append first-ls '("…") last-ls)
-     (append first-ls last-ls))
-   "\n"))
-#+end_src
-
-** Setup action
-
-The following helps (using Noweb) set up Nix environment variables for source
-block evaluation.
-
-#+name: nix-init
-#+begin_src sh :eval no
-export NIX_PROFILE=$(pwd)/nix-profile
-export NIX_PAGER=cat
-export PATH="$NIX_PROFILE/bin:$PATH"
-#+end_src
-
-Next we perform some side-effects to set up the evaluation of the whole
-document.
-
-#+name: cleanup
-#+begin_src sh :results output silent :noweb yes
-<<nix-init>>
-rm --force result*
-rm --force "$NIX_PROFILE"*
-#+end_src
-
-This is just a hack to deal with the fact that we never know what directory a
-session will start in, so we need a way to calculate the PWD to jump to it.
-
-#+name: pwd-parent
-#+begin_src sh :results output silent
-echo cd "$(pwd)"
-#+end_src
-
-This begins a session with environment variables initialized.
-
-#+name: session-init
-#+begin_src sh :session env :results output silent :noweb yes
-<<pwd-parent()>>
-<<nix-init>>
-#+end_src
 
 * About this project
 
@@ -71,7 +9,7 @@ This project provides a [[nix][Nix package manager]] expression to repackage the
 proprietary [[bluos][BluOS Controller]] for Linux. BluOS is software for managing
 digital/streaming music bundled with various music streamers and amplifiers.
 
-The "main" branch provides the latest release of 3.14.1 of the controller. See
+The "main" branch provides the latest release of 3.20.5 of the controller. See
 "old/*" branches for older versions.
 
 This project is unofficial. The official distribution is only for Windows, Macs,
@@ -82,15 +20,18 @@ light patching.
 This project is only tested against Linux and does not work on MacOS. Use the
 official BluOS distributions for MacOS or any other platform.
 
+* Building, packaging, and distributing with Nix
+
 Projects such as this one have been birthed by [[bluos-forum][a post on the official BluOS
 support forum]]. There's a few projects that do what this project does, but
 without Nix. Here's a comparison with two of them:
 
-| Project             | Dependencies                                   | Outputs        |
-|---------------------+------------------------------------------------+----------------|
-| [[https://github.com/dave92082/bs-patch][dave92082/bs-patch]]  | Go+NodeJS/NPM+P7ZIP                            | Snap, AppImage |
-| [[https://github.com/frafra/bs-bashpatch][frafra/bs-bashpatch]] | Go+P7ZIP+NodeJS/NPM+Lynx+… or Podman or Docker | AppImage       |
-| This project        | Nix package manager                            | Nix package    |
+| Project                                    | Dependencies                                   | Outputs        |
+|--------------------------------------------+------------------------------------------------+----------------|
+| [[https://github.com/dave92082/bs-patch][dave92082/bs-patch]]                         | Go+NodeJS/NPM+P7ZIP                            | Snap, AppImage |
+| [[https://github.com/frafra/bs-bashpatch][frafra/bs-bashpatch]]                        | Go+P7ZIP+NodeJS/NPM+Lynx+… or Podman or Docker | AppImage       |
+| [[https://gitlab.com/fabrice.aeschbacher/bluos-controller-linux][fabrice.aeschbacher/bluos-controller-linux]] | P7ZIP+NodeJS/NPM+…                             | AppImage       |
+| This project                               | Nix package manager                            | Nix package    |
 
 Nix is a package manager we can use to both build and install the controller.
 NixOS is a distribution that uses this package manager, but we can install Nix
@@ -100,48 +41,32 @@ other package managers such as APT, Yum, Pacman, etc.
 A primary motivation to use Nix is to reduce build dependencies. This is not
 dissimilar from the optional usage of Podman or Docker of =bs-bashpatch=, but
 Nix offers an architecture for reproducible builds well above what Podman or
-Docker can accomplish. If you're new to Nix, see [[file:doc/nix.org][the provided documentation on
-Nix]] for more on what it is, and how to get set up with it for this project.
+Docker can accomplish. If you're new to Nix this project bundles a few guides
+to get you started:
+
+- [[file:doc/nix-introduction.org][Introduction to Nix and motivations to use it]]
+- [[file:doc/nix-installation.org][Nix installation and configuration guide]]
+- [[file:doc/nix-usage-flakes.org][Nix end user guide]]
+- [[file:doc/nix-language.org][Introduction to the Nix programming language]]
 
 Ultimately, we're trading off complexity. You take on the complexity of
 installing the Nix package manager (or running NixOS). After that projects like
 this can more easily build applications without you having to worry about having
 the right software installed and configured. All you need is Nix.
 
-* Nix setup
-
-To use Nix at all, you first need to have it on your system.
-
-#+include: "doc/nix.org::*Nix package manager setup"
-
-* Installation
-
-Once you have Nix available as a package manager, you can then run the following
-to install the BluOS controller:
-
-#+begin_src sh :eval no
-nix-env --install --file .
-#+end_src
-
-#+name: nix-env-install
-#+begin_src sh :session env :results output :exports results :noweb yes :post crop(text=*this*, first-n=1, last-n=3)
-nix-env --install --file . 2>&1
-#+end_src
-
-#+results: nix-env-install
-: installing 'bluos-controller'
-
-You should then see the controller installed at
-=~/.nix-profile/bin/bluos-controller=. For convenience, configure your shell to
-put =~/.nix-profile/bin= on your =PATH=.
-
 * Usage
 
-We generally start the controller with no arguments:
+As discussed in the [[file:doc/nix-usage-flakes.org][end user guide]] after [[file:doc/nix-installation.org][installing Nix]], we can run the BluOS
+controller without even installing it:
 
 #+begin_src sh :eval no
-bluos-controller
+nix run github:shajra/bluos-controller
 #+end_src
+
+The guide also discusses how to install the application so it's accessible from
+your =PATH=.
+
+We generally start the controller with no arguments.
 
 Sometimes it gets a little stuck. If this happens, try hitting =ctrl-r= to reset
 the application. You can also type =Alt= to see the Electron menu (auto-hidden
@@ -154,9 +79,13 @@ output/error.
 
 You can call the controller with =--help= or =--help-daemon= for more details:
 
-#+name: help
-#+begin_src sh :session env :results output :exports both
+#+begin_src sh :eval no
 bluos-controller --help
+#+end_src
+
+#+name: help
+#+begin_src sh :results output :exports results
+nix run . -- --help
 #+end_src
 
 #+results: help
@@ -179,6 +108,7 @@ OPTIONS:
     -h --help            print this help message
     -H --help-daemon     print this help message
     -s --scale           DPI scaling factor
+
 #+end_example
 
 * Release
@@ -217,7 +147,3 @@ the network.
 * Contribution
 
 Feel free to file issues and submit pull requests with GitHub.
-
-* Org-mode teardown :noexport:
-
-#+call: cleanup()
