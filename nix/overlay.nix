@@ -4,7 +4,6 @@ final: prev:
 let
 
     system = prev.stdenv.hostPlatform.system;
-    pname = "bluos-controller";
     patches = [ ./patches/${meta.version}-linux.patch ];
 
 in withSystem system ({ inputs', ... }: {
