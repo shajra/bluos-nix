@@ -104,11 +104,11 @@ As illustrated below, we can't rebind a name:
 nix eval --expr 'let a = 1; a = 2; in a' 2>&1 || true
 ```
 
-    error: attribute 'a' already defined at (string):1:5
+    error: attribute 'a' already defined at «string»:1:5
     
            at «string»:1:12:
     
-                1| let a = 1; a = 2; in a
+                1| let a = 1; a = 2;
                  |            ^
 
 Note that semicolons are mandatory in all Nix forms that have them, including let-expressions. Because of Nix's strict parsing you can neither elide semicolons, nor put extra ones.
@@ -288,7 +288,7 @@ This basic pattern syntax is rigid, and we can't pass in a attribute set with at
 nix eval --expr '({ a }: a + 2 ) { a = 3; b = 4; }' 2>&1 || true
 ```
 
-    error: anonymous function at (string):1:2 called with unexpected argument 'b'
+    error: anonymous function at «string»:1:2 called with unexpected argument 'b'
     
            at «string»:1:1:
     
@@ -402,13 +402,13 @@ nix eval --impure --expr '
 ```
 
     {
-      lastModified = 1678188176;
-      lastModifiedDate = "20230307112256";
-      narHash = "sha256-IH80NcLhwjGpIXEjHuV+NgaSC+Y/PXquxZ/C8Bl+CLk=";
-      outPath = "/nix/store/4hm39fpkqz41jqpz21yf98mcisb1k9bx-source";
-      rev = "ea2fca765c440fff1ff74e1463444dea7b819db2";
-      revCount = 808;
-      shortRev = "ea2fca7";
+      lastModified = 1689839963;
+      lastModifiedDate = "20230720075923";
+      narHash = "sha256-qX0pGkHeX+KssiATwwohzUlGIZQqpIjKsLv32U2nyWA=";
+      outPath = "/nix/store/nln6mqmz3pdis0qv36kvczyfsyafc5wl-source";
+      rev = "c40128936fc804b74abddaa0bc1d8ef6e5dba48e";
+      revCount = 839;
+      shortRev = "c401289";
       submodules = false;
     }
 

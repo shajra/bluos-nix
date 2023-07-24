@@ -78,7 +78,6 @@ nix registry list
 ```
 
     …
-    global flake:nixpkgs github:NixOS/nixpkgs/nixpkgs-unstable
     global flake:templates github:NixOS/templates
     global flake:patchelf github:NixOS/patchelf
     global flake:poetry2nix github:nix-community/poetry2nix
@@ -86,6 +85,7 @@ nix registry list
     global flake:nickel github:tweag/nickel
     global flake:bundlers github:NixOS/bundlers
     global flake:pridefetch github:SpyHoodle/pridefetch
+    global flake:systems github:nix-systems/default
     global flake:helix github:helix-editor/helix
     global flake:sops-nix github:Mic92/sops-nix
 
@@ -190,16 +190,19 @@ As discussed in a previous section, we can use the flakes registry identifier of
 nix search nixpkgs 'gpu|opengl|accel' terminal
 ```
 
-    * legacyPackages.x86_64-linux.alacritty (0.11.0)
+    * legacyPackages.x86_64-linux.alacritty (0.12.2)
       A cross-platform, GPU-accelerated terminal emulator
     
     * legacyPackages.x86_64-linux.darktile (0.0.10)
       A GPU rendered terminal emulator designed for tiling window managers
     
-    * legacyPackages.x86_64-linux.kitty (0.27.1)
+    * legacyPackages.x86_64-linux.kitty (0.29.1)
       A modern, hackable, featureful, OpenGL based terminal emulator
     
-    * legacyPackages.x86_64-linux.wezterm (20221119-145034-49b9839f)
+    * legacyPackages.x86_64-linux.rio (0.0.9)
+      A hardware-accelerated GPU terminal emulator powered by WebGPU
+    
+    * legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
       GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust
 
 If we're curious what version of WezTerm is available in NixOS's latest release, we can specialize the installable we're searching as follows:
@@ -251,7 +254,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/54qmdq2rx6n01x3ryl57862rwy991vgk-bluos-controller
+    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -273,7 +276,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/54qmdq2rx6n01x3ryl57862rwy991vgk-bluos-controller
+    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -354,9 +357,9 @@ nix search --json .#bluos-controller | jq .
 
     {
       "packages.x86_64-linux.bluos-controller": {
+        "description": "BluOS Controller 3.20.5 (non-free)",
         "pname": "bluos-controller",
-        "version": "",
-        "description": "BluOS Controller 3.20.5 (non-free)"
+        "version": ""
     …
 
 In the JSON above, the “pname” field indicates the package's name. In practice, this may or may not differ from flake output name of the installable.
@@ -386,7 +389,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/54qmdq2rx6n01x3ryl57862rwy991vgk-bluos-controller/bin/bluos-controller
+    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's good to see clearly that what we do with local flake references can work just as well with remote flake references.
 
@@ -410,7 +413,7 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/54qmdq2rx6n01x3ryl57862rwy991vgk-bluos-controller
+    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
 
 The output of `nix profile list` is a bit verbose, but each line has three parts:
 
