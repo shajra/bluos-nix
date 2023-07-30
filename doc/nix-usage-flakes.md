@@ -91,7 +91,7 @@ nix registry list
 
 For example, rather than referencing the flake on the `nixpkgs-unstable` branch of the Nixpkgs GitHub repository with `github:NixOS/nixpkgs/nixpkgs-unstable`, we can just use the simple identifier `nixpkgs`.
 
-If we want to point to a different branch, but still use an identifier from the registry, we can by extending it with the branch. For example, the flakes identifier `nixpkgs` is the same as `nixpkgs/nixpkgs-ustable`, but we can also use `nixpkgs/nixos-22.11` to override the branch and point to the NixOS 22.11 release branch.
+If we want to point to a different branch, but still use an identifier from the registry, we can by extending it with the branch. For example, the flakes identifier `nixpkgs` is the same as `nixpkgs/nixpkgs-ustable`, but we can also use `nixpkgs/nixos-23.05` to override the branch and point to the NixOS 23.05 release branch.
 
 Note, registries have mutable references, but for some of these references Nix knows how to repeatably rebuild the snapshot referenced. For example, when referencing a GitHub repository via a registry reference, Nix will take note of the commit ID of the snapshot retrieved.
 
@@ -196,7 +196,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
     * legacyPackages.x86_64-linux.darktile (0.0.10)
       A GPU rendered terminal emulator designed for tiling window managers
     
-    * legacyPackages.x86_64-linux.kitty (0.29.1)
+    * legacyPackages.x86_64-linux.kitty (0.29.2)
       A modern, hackable, featureful, OpenGL based terminal emulator
     
     * legacyPackages.x86_64-linux.rio (0.0.9)
@@ -208,13 +208,13 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
 If we're curious what version of WezTerm is available in NixOS's latest release, we can specialize the installable we're searching as follows:
 
 ```sh
-nix search nixpkgs/nixos-22.11#wezterm
+nix search nixpkgs/nixos-23.05#wezterm
 ```
 
-    * legacyPackages.x86_64-linux.wezterm (20220905-102802-7d4b8249)
-      A GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust
+    * legacyPackages.x86_64-linux.wezterm (20230408-112425-69ae8472)
+      GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust
 
-Here `/nixos-22.11` overrides the default `nixpkgs-unstable` branch of the registry entry, and the `#wezterm` suffix searches not just the flake, but a specific package named `wezterm`, which will either be found or not (there's no need for regexes to filter further).
+Here `/nixos-23.05` overrides the default `nixpkgs-unstable` branch of the registry entry, and the `#wezterm` suffix searches not just the flake, but a specific package named `wezterm`, which will either be found or not (there's no need for regexes to filter further).
 
 You may also notice that the Nixpkgs flake outputs packages under the `legacyPackages` attribute instead of the `packages`. The primary difference is that packages are flatly organized under `packages`, while `legacyPackages` can be an arbitrary tree. `legacyPackages` exists specifically for the Nixpkgs project, a central project to the Nix ecosystem that's existed long before flakes. Beyond Nixpkgs, don't worry about `legacyPackages`. Packages from all other flakes should generally be found under `packages`.
 
@@ -254,7 +254,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
+    /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -276,7 +276,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
+    /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -389,7 +389,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller/bin/bluos-controller
+    /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's good to see clearly that what we do with local flake references can work just as well with remote flake references.
 
@@ -413,7 +413,7 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/6d63bfqwzv3r57c0cnbkhx9ylln7fvbr-bluos-controller
+    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
 
 The output of `nix profile list` is a bit verbose, but each line has three parts:
 
