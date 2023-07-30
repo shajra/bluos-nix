@@ -10,6 +10,6 @@
  ;; run-type must be "executable"
  (run-target-short     . "bluos-controller")
  (run-target-long      . "bin/bluos-controller")
- (nix-latest           . "2.14")
- (nixos-latest         . "22.11")
+ (nix-latest           . "2.17")
+ (nixos-latest         . "23.05")
  (platforms            . "Linux on x86-64 machines"))
