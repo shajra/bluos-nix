@@ -33,6 +33,10 @@ stdenv.mkDerivation {
             --replace  \
             '"darwin"' \
             '"linux"'
+        substituteInPlace www/js/app.*.js \
+            --replace  \
+            '"MacOS"' \
+            '"Linux"'
     '';
     installPhase = ''
         mkdir --parents "$out"

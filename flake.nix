@@ -5,14 +5,15 @@
         flake-parts.url = github:hercules-ci/flake-parts;
         nix-project.url = github:shajra/nix-project;
         bluos-controller-packed = {
-            url = https://bluos.net/wp-content/uploads/2023/02/BluOS-Controller-3.20.5.exe;
+            url = https://content-bluesound-com.s3.amazonaws.com/uploads/2023/08/BluOS-Controller-3.20.6.exe;
+            #url = https://bluos.net/wp-content/uploads/2023/02/BluOS-Controller-3.20.5.exe;
             flake = false;
         };
     };
 
     outputs = inputs@{ flake-parts, nix-project, ... }:
         let meta.pname = "bluos-controller";
-            meta.version = "3.20.5";
+            meta.version = "3.20.6";
         in flake-parts.lib.mkFlake { inherit inputs; } ({withSystem, config, ... }: {
             imports = [ nix-project.flakeModules.nixpkgs ];
             systems = [ "x86_64-linux" ];
