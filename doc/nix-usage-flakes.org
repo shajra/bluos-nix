@@ -295,10 +295,10 @@ nix search . | ansifilter
 
 #+results: nix-search-local
 : * packages.x86_64-linux.bluos-controller
-:   BluOS Controller 3.20.5 (non-free)
+:   BluOS Controller 3.20.6 (non-free)
 : 
 : * packages.x86_64-linux.default
-:   BluOS Controller 3.20.5 (non-free)
+:   BluOS Controller 3.20.6 (non-free)
 
 If a flake has a lot of packages, you can pass regexes to prune down the search.
 Returned values will match all the regexes provided. Also, we can search a
@@ -335,10 +335,10 @@ nix search nixpkgs 'gpu|opengl|accel' terminal | ansifilter
 ,* legacyPackages.x86_64-linux.darktile (0.0.10)
   A GPU rendered terminal emulator designed for tiling window managers
 
-,* legacyPackages.x86_64-linux.kitty (0.29.2)
+,* legacyPackages.x86_64-linux.kitty (0.30.0)
   A modern, hackable, featureful, OpenGL based terminal emulator
 
-,* legacyPackages.x86_64-linux.rio (0.0.9)
+,* legacyPackages.x86_64-linux.rio (0.0.19)
   A hardware-accelerated GPU terminal emulator powered by WebGPU
 
 ,* legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
@@ -385,10 +385,10 @@ nix search . '<<get("package-attr-short")>>' | ansifilter
 
 #+RESULTS: nix-search-specific
 : * packages.x86_64-linux.bluos-controller
-:   BluOS Controller 3.20.5 (non-free)
+:   BluOS Controller 3.20.6 (non-free)
 : 
 : * packages.x86_64-linux.default
-:   BluOS Controller 3.20.5 (non-free)
+:   BluOS Controller 3.20.6 (non-free)
 
 We can see that a package can be accessed with the {{{package-attr-long}}}
 output attribute path of the project's flake. Not shown in the search results
@@ -437,7 +437,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
+: /nix/store/4dac0w8314mg0g1lq95nvjiyly686vg2-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -466,7 +466,7 @@ nix path-info .#<<get("package-attr-short")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
+: /nix/store/4dac0w8314mg0g1lq95nvjiyly686vg2-bluos-controller
 
 ** Running commands in a shell
 
@@ -581,7 +581,7 @@ nix search --json .#<<get("run-attr-short")>> | jq .
 #+RESULTS: nix-search-details
 : {
 :   "packages.x86_64-linux.bluos-controller": {
-:     "description": "BluOS Controller 3.20.5 (non-free)",
+:     "description": "BluOS Controller 3.20.6 (non-free)",
 :     "pname": "bluos-controller",
 :     "version": ""
 : …
@@ -626,7 +626,7 @@ nix shell --ignore-environment \
 #+end_src
 
 #+RESULTS: nix-shell-remote
-: /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller/bin/bluos-controller
+: /nix/store/4dac0w8314mg0g1lq95nvjiyly686vg2-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's
 good to see clearly that what we do with local flake references can work just as
@@ -674,7 +674,7 @@ nix profile list --profile /tmp/nix-profile
 #+end_src
 
 #+RESULTS: nix-profile-list
-: 0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/81xjykmi2xcjyckksmfnp3hg3w6pmfsa-bluos-controller
+: 0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/4dac0w8314mg0g1lq95nvjiyly686vg2-bluos-controller
 
 The output of =nix profile list= is a bit verbose, but each line has three parts:
 - an index to use with other =nix profile= subcommands (like =nix profile remove=)

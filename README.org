@@ -9,7 +9,7 @@ This project provides a [[nix][Nix package manager]] expression to repackage the
 proprietary [[bluos][BluOS Controller]] for Linux. BluOS is software for managing
 digital/streaming music bundled with various music streamers and amplifiers.
 
-The "main" branch provides the latest release of 3.20.5 of the controller. See
+The "main" branch provides the latest release of 3.20.6 of the controller. See
 "old/*" branches for older versions.
 
 This project is unofficial. The official distribution is only for Windows, Macs,
