@@ -28,12 +28,16 @@ stdenv.mkDerivation {
     unpackPhase = ''
         asar extract "$src/resources/app.asar" .
         dos2unix common/mainWindow.js
-        js-beautify -r www/js/app.*.js
-        substituteInPlace www/js/app.*.js \
+        js-beautify -r www/assets/index-*.js
+        substituteInPlace www/assets/*.js \
+            --replace  \
+            '"linux"' \
+            '"_linux"'
+        substituteInPlace www/assets/*.js \
             --replace  \
             '"darwin"' \
             '"linux"'
-        substituteInPlace www/js/app.*.js \
+        substituteInPlace www/assets/*.js \
             --replace  \
             '"MacOS"' \
             '"Linux"'

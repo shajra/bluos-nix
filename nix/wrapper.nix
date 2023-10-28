@@ -2,7 +2,7 @@
 , bluos-controller-unasar-patched
 , coreutils
 , daemon
-, electron_9
+, electron_24
 , lib
 , nix-project-lib
 }:
@@ -23,7 +23,7 @@ in nix-project-lib.writeShellCheckedExe pname
         bc
         coreutils
         daemon
-        electron_9
+        electron_24
     ];
     pathPure = false;
 }

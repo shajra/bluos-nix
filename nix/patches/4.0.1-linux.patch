@@ -1,0 +1,31 @@
+diff --git a/common/mainWindow.js b/common/mainWindow.js
+index fae8f15..dd2a9ee 100644
+--- a/common/mainWindow.js
++++ b/common/mainWindow.js
+@@ -27,6 +27,7 @@ class MainWindow {
+       minHeight: 480,
+       backgroundColor: "#111",
+       show: false,
++      icon: path.join(__dirname, "..", "www",  "img", "icon.png"),
+       webPreferences: {
+         devTools: runInDevMode,
+         sandbox: true,
+diff --git a/package.json b/package.json
+index 2c92687..d93d3dd 100644
+--- a/package.json
++++ b/package.json
+@@ -14,5 +14,13 @@
+     "http-terminator": "^3.2.0",
+     "sanitize-filename": "^1.6.3",
+     "sudo-prompt": "^9.2.1"
++  },
++  "devDependencies": {
++    "electron-builder": "24.8.6"
++  },
++  "build": {
++    "appId": "com.bluos.app",
++    "electronVersion": "24.8.6",
++    "extraResources": [ { "from": "resources", "to": ".", "filter": [ "**/*" ] } ]
+   }
+ }
+\ No newline at end of file
