@@ -1,5 +1,4 @@
 { bluos-controller-unpacked
-, dos2unix
 , nodePackages
 , stdenv
 }:
@@ -13,10 +12,8 @@ stdenv.mkDerivation {
     inherit version patches;
     src = bluos-controller-unpacked;
     patchFlags = [ "-p1" ];
-    nativeBuildInputs = with nodePackages; [
-        asar
-        dos2unix
-        js-beautify
+    nativeBuildInputs = [
+        nodePackages.asar
     ];
     phases = ["unpackPhase" "patchPhase" "postPhase" "installPhase"];
     postPhase = ''
@@ -27,8 +24,6 @@ stdenv.mkDerivation {
     '';
     unpackPhase = ''
         asar extract "$src/resources/app.asar" .
-        dos2unix common/mainWindow.js
-        js-beautify -r www/assets/index-*.js
         substituteInPlace www/assets/*.js \
             --replace  \
             '"linux"' \
@@ -47,6 +42,5 @@ stdenv.mkDerivation {
         cp -r . "$out"
         mkdir --parents "$out/resources"
         cp -r "$src/resources/analytics" "$out/resources"
-        mkdir "$out/icons" && cp www/img/icon.png "$out/icons/256x256.png"
     '';
 }

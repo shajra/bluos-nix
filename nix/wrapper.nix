@@ -1,8 +1,8 @@
 { bc
-, bluos-controller-unasar-patched
+, bluos-controller-unasar-unpatched
 , coreutils
 , daemon
-, electron_24
+, electron
 , lib
 , nix-project-lib
 }:
@@ -14,7 +14,7 @@ let
 
     meta.description = "BluOS Controller ${version} (non-free)";
     meta.platforms = lib.platforms.linux;
-    app = bluos-controller-unasar-patched;
+    app = bluos-controller-unasar-unpatched;
 
 in nix-project-lib.writeShellCheckedExe pname
 {
@@ -23,7 +23,7 @@ in nix-project-lib.writeShellCheckedExe pname
         bc
         coreutils
         daemon
-        electron_24
+        electron
     ];
     pathPure = false;
 }

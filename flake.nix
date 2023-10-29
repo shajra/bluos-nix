@@ -21,10 +21,6 @@
             perSystem = { system, nixpkgs, ... }:
                 let build = import nixpkgs.stable.path {
                         inherit system;
-                        config.permittedInsecurePackages = [
-                            "electron-24.8.6"
-                            #"electron-9.4.4"
-                        ];
                         overlays = [ config.flake.overlays.default ];
                     };
                 in {
