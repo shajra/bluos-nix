@@ -60,7 +60,7 @@ As discussed in the [[file:doc/nix-usage-flakes.org][end user guide]] after [[fi
 controller without even installing it:
 
 #+begin_src sh :eval no
-nix run github:shajra/bluos-controller
+nix run github:shajra/bluos-nix
 #+end_src
 
 The guide also discusses how to install the application so it's accessible from
