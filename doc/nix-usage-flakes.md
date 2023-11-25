@@ -196,10 +196,10 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
     * legacyPackages.x86_64-linux.darktile (0.0.10)
       A GPU rendered terminal emulator designed for tiling window managers
     
-    * legacyPackages.x86_64-linux.kitty (0.30.1)
+    * legacyPackages.x86_64-linux.kitty (0.31.0)
       A modern, hackable, featureful, OpenGL based terminal emulator
     
-    * legacyPackages.x86_64-linux.rio (0.0.19)
+    * legacyPackages.x86_64-linux.rio (0.0.27)
       A hardware-accelerated GPU terminal emulator powered by WebGPU
     
     * legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
@@ -254,7 +254,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/18g6k4azxr2x1gaq9qjvym24n3g6j18l-bluos-controller
+    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -276,7 +276,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/18g6k4azxr2x1gaq9qjvym24n3g6j18l-bluos-controller
+    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -389,7 +389,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/18g6k4azxr2x1gaq9qjvym24n3g6j18l-bluos-controller/bin/bluos-controller
+    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's good to see clearly that what we do with local flake references can work just as well with remote flake references.
 
@@ -413,7 +413,7 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/18g6k4azxr2x1gaq9qjvym24n3g6j18l-bluos-controller
+    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
 
 The output of `nix profile list` is a bit verbose, but each line has three parts:
 
