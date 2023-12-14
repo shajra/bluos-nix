@@ -171,10 +171,10 @@ nix search .
 ```
 
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.0.2 (non-free)
+      BluOS Controller 4.2.0 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.0.2 (non-free)
+      BluOS Controller 4.2.0 (non-free)
 
 If a flake has a lot of packages, you can pass regexes to prune down the search. Returned values will match all the regexes provided. Also, we can search a remote repository as well for packages to install.
 
@@ -199,7 +199,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
     * legacyPackages.x86_64-linux.kitty (0.31.0)
       A modern, hackable, featureful, OpenGL based terminal emulator
     
-    * legacyPackages.x86_64-linux.rio (0.0.27)
+    * legacyPackages.x86_64-linux.rio (0.0.29)
       A hardware-accelerated GPU terminal emulator powered by WebGPU
     
     * legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
@@ -223,10 +223,10 @@ You may also notice that the Nixpkgs flake outputs packages under the `legacyPac
 The following result is one returned by our prior execution of `nix search .`:
 
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.0.2 (non-free)
+      BluOS Controller 4.2.0 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.0.2 (non-free)
+      BluOS Controller 4.2.0 (non-free)
 
 We can see that a package can be accessed with the `packages.x86_64-linux.bluos-controller` output attribute path of the project's flake. Not shown in the search results above, this package happens to provide the executable `bin/bluos-controller`.
 
@@ -254,7 +254,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
+    /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -266,7 +266,7 @@ tree -l result*
     └── bin
         └── bluos-controller
     
-    1 directory, 1 file
+    2 directories, 1 file
 
 It's common to configure these “result” symlinks as ignored in source control tools (for instance, for Git within a `.gitignore` file).
 
@@ -276,7 +276,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
+    /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -357,7 +357,7 @@ nix search --json .#bluos-controller | jq .
 
     {
       "packages.x86_64-linux.bluos-controller": {
-        "description": "BluOS Controller 4.0.2 (non-free)",
+        "description": "BluOS Controller 4.2.0 (non-free)",
         "pname": "bluos-controller",
         "version": ""
     …
@@ -389,7 +389,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller/bin/bluos-controller
+    /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's good to see clearly that what we do with local flake references can work just as well with remote flake references.
 
@@ -413,7 +413,7 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/bxv3rdg2snrswk9vss9kz4i4waghkwxx-bluos-controller
+    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
 
 The output of `nix profile list` is a bit verbose, but each line has three parts:
 
