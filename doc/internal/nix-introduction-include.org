@@ -1,1 +1,1 @@
-#+comment: "nix-introduction-compat.org"
+#+include: "nix-introduction-compat.org"

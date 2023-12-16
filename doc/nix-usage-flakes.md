@@ -19,7 +19,9 @@
 
 This document explains how to take advantage of software provided by Nix for people new to [the Nix package manager](https://nixos.org/nix). This guide uses this project for examples, but it focused on introducing general Nix usage, which applies to other projects using Nix as well.
 
-This project requires an experimental feature of Nix called *flakes*. To understand more about what flakes are and the consequences of using a still-experimental feature of Nix, please see the provided [introduction to Nix](../nix-introduction.md).
+This project supports a still-experimental feature of Nix called *flakes*, which this guide shows users how to use. [Another guide](nix-usage-noflakes.md) explains how to do everything illustrated in this document, but without flakes.
+
+> **<span class="underline">NOTE:</span>** If you're new to flakes, please read the provided [supplemental introduction to Nix](nix-introduction.md) to understand the experimental nature of flakes and how it may or may not affect you. Hopefully you'll find these trade-offs acceptable so you can take advantage of the improved experience flakes offer.
 
 # How this project uses Nix<a id="sec-2"></a>
 
@@ -110,15 +112,8 @@ nix flake show .
     │   └───x86_64-linux
     │       ├───bluos-controller: app
     │       └───default: app
-    ├───checks
-    │   └───x86_64-linux
-    ├───devShells
-    │   └───x86_64-linux
-    ├───formatter
     ├───legacyPackages
     │   └───x86_64-linux omitted (use '--legacy' to show)
-    ├───nixosConfigurations
-    ├───nixosModules
     ├───overlays
     │   └───default: Nixpkgs overlay
     └───packages
@@ -199,7 +194,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
     * legacyPackages.x86_64-linux.kitty (0.31.0)
       A modern, hackable, featureful, OpenGL based terminal emulator
     
-    * legacyPackages.x86_64-linux.rio (0.0.29)
+    * legacyPackages.x86_64-linux.rio (0.0.32)
       A hardware-accelerated GPU terminal emulator powered by WebGPU
     
     * legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
@@ -413,22 +408,19 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    0 git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller git+file:///home/tnks/src/shajra/bluos-nix#packages.x86_64-linux.bluos-controller /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+    Index:              [1m0[0m
+    Flake attribute:    packages.x86_64-linux.bluos-controller
+    Original flake URL: git+file:///home/tnks/src/shajra/bluos-nix
+    Locked flake URL:   git+file:///home/tnks/src/shajra/bluos-nix
+    Store paths:        /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
 
-The output of `nix profile list` is a bit verbose, but each line has three parts:
-
--   an index to use with other `nix profile` subcommands (like `nix profile remove`)
--   the specified installable reference
--   the resolved reference actually installed
--   the store path in `/nix/store`
-
-And if we want to uninstall a program from our profile, we do so by the index
+If we want to uninstall a program from our profile, we do so by the index from this list:
 
 ```sh
 nix profile remove 0
 ```
 
-we can also provide a regex matching the full attribute path of the flake:
+We can also provide a regex matching the full attribute path of the flake:
 
 ```sh
 nix profile remove '.*bluos-controller'
