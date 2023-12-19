@@ -35,6 +35,7 @@
                         };
                     };
                     legacyPackages.nixpkgs = build;
+                    legacyPackages.ci = build.bluos-controller;
                 };
             flake.overlays.default =
                 import nix/overlay.nix inputs withSystem meta;
