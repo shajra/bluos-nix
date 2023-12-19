@@ -20,7 +20,6 @@ nix shell \
     org2gfm \
     --path-bin \
     --exclude internal \
-    --exclude example \
     --nix "$(command -v nix)" \
     --evaluate \
     "$@"
