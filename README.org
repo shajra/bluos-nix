@@ -49,10 +49,10 @@ to get you started:
 - [[file:doc/nix-usage-flakes.org][Nix end user guide]]
 - [[file:doc/nix-language.org][Introduction to the Nix programming language]]
 
-Ultimately, we're trading off complexity. You take on the complexity of
-installing the Nix package manager (or running NixOS). After that projects like
-this can more easily build applications without you having to worry about having
-the right software installed and configured. All you need is Nix.
+Ultimately, we're trading complexity. You take on the complexity of installing
+the Nix package manager (or running NixOS). After that projects like this can
+more easily build applications without you having to worry about having the
+right software installed and configured. All you need is Nix.
 
 * Usage
 

@@ -37,7 +37,7 @@ A primary motivation to use Nix is to reduce build dependencies. This is not dis
 -   [Nix end user guide](doc/nix-usage-flakes.md)
 -   [Introduction to the Nix programming language](doc/nix-language.md)
 
-Ultimately, we're trading off complexity. You take on the complexity of installing the Nix package manager (or running NixOS). After that projects like this can more easily build applications without you having to worry about having the right software installed and configured. All you need is Nix.
+Ultimately, we're trading complexity. You take on the complexity of installing the Nix package manager (or running NixOS). After that projects like this can more easily build applications without you having to worry about having the right software installed and configured. All you need is Nix.
 
 # Usage<a id="sec-3"></a>
 
