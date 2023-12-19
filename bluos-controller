@@ -1,0 +1,25 @@
+#!/bin/sh -eu
+
+cd "$(dirname "$0")"
+
+# If you installed Nix with flakes enabled...
+#
+if nix --extra-experimental-features nix-command \
+    show-config experimental-features | grep flakes
+
+# then running the BluOS controller is quick and simple
+#
+then nix run . -- "$@"
+
+# otherwise, we can run it without flakes still.
+#
+else
+  nix --extra-experimental-features nix-command shell \
+      --ignore-environment \
+      --file . \
+      packages.x86_64-linux.bluos-controller \
+      --command \
+      bluos-controller \
+      "$@"
+
+fi

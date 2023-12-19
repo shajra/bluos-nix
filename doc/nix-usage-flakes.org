@@ -26,7 +26,7 @@ following macros and source code blocks (using Noweb).
 #+macro: run-attr-long {{{get(run-attr-long,=,=)}}}
 #+macro: run-name {{{get(run-target-short,“,”)}}}
 #+macro: run-target-short {{{get(run-target-short,=,=)}}}
-#+macro: run-target-long {{{get(run-target-long,=,=)}}}
+#+macro: run-target-long {{{get(run-target-short,=bin/,=)}}}
 #+macro: nix-latest {{{get(nix-latest)}}}
 #+macro: nixos-latest {{{get(nixos-latest)}}}
 #+macro: platforms {{{get(platforms)}}}
@@ -351,7 +351,7 @@ nix search nixpkgs/nixos-<<get("nixos-latest")>>#wezterm | ansifilter
 #+end_src
 
 #+RESULTS: nix-search-remote-wezterm
-: * legacyPackages.x86_64-linux.wezterm (20230408-112425-69ae8472)
+: * legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
 :   GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust
 
 Here {{{get(nixos-latest,~/nixos-,~)}}} overrides the default =nixpkgs-unstable= branch of

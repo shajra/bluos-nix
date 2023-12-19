@@ -266,12 +266,12 @@ If we want something other than what can be detected, then we have to continue u
 
 The previous sections show how to use `nix run` and `nix shell` to run commands in an environment that includes packages from a project local to our filesystem.
 
-We can reference remote projects that have a `default.nix` file using URLs with the `--file` switch. For example, here we reference a tarball of the 23.05 release of Nixpkgs:
+We can reference remote projects that have a `default.nix` file using URLs with the `--file` switch. For example, here we reference a tarball of the 23.11 release of Nixpkgs:
 
 ```sh
 nix --extra-experimental-features 'nix-command' \
     run \
-    --file https://github.com/NixOS/nixpkgs/archive/23.05.tar.gz \
+    --file https://github.com/NixOS/nixpkgs/archive/23.11.tar.gz \
     hello
 ```
 

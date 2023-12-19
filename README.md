@@ -41,13 +41,15 @@ Ultimately, we're trading off complexity. You take on the complexity of installi
 
 # Usage<a id="sec-3"></a>
 
-As discussed in the [end user guide](doc/nix-usage-flakes.md) after [installing Nix](doc/nix-installation.md), we can run the BluOS controller without even installing it:
+As discussed in the [end user guide](doc/nix-usage-flakes.md) after [installing Nix with flakes](doc/nix-installation.md), we can run the BluOS controller without even installing it:
 
 ```sh
 nix run github:shajra/bluos-nix
 ```
 
 The guide also discusses how to install the application so it's accessible from your `PATH`.
+
+There's also a small [`bluos-controller` script](bluos-controller) at this project's root that will run the exact version checked out from Git, whether you installed Nix with flakes or not.
 
 We generally start the controller with no arguments.
 

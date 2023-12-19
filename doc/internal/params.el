@@ -9,7 +9,7 @@
  ;; run-name must be the same as run-target-short
  ;; run-type must be "executable"
  (run-target-short     . "bluos-controller")
- (run-target-long      . "bin/bluos-controller")
+ ;; run-target-long will always prefix "bin/"
  (nix-latest           . "2.19")
- (nixos-latest         . "23.05")
+ (nixos-latest         . "23.11")
  (platforms            . "Linux on x86-64 machines"))
