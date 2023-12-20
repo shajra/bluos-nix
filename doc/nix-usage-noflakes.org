@@ -169,14 +169,18 @@ nix --experimental-features nix-command search --file . '' | ansifilter
 #+end_src
 
 #+RESULTS: nix-search-local
-: * default
-:   BluOS Controller 4.2.0 (non-free)
-: 
-: * packages.x86_64-linux.bluos-controller
-:   BluOS Controller 4.2.0 (non-free)
-: 
-: * packages.x86_64-linux.default
-:   BluOS Controller 4.2.0 (non-free)
+#+begin_example
+,* default
+  BluOS Controller 4.2.0 (non-free)
+
+,* legacyPackages.x86_64-linux.ci
+  BluOS Controller 4.2.0 (non-free)
+
+,* packages.x86_64-linux.bluos-controller
+  BluOS Controller 4.2.0 (non-free)
+
+…
+#+end_example
 
 If you have the =nix-command= feature disabled, and typing out ~nix
 --extra-experimental-features nix-command~ is too verbose for your tastes,
@@ -211,6 +215,9 @@ nix --experimental-features nix-command \
 #+end_src
 
 #+RESULTS: nix-search-filtered
+: * legacyPackages.x86_64-linux.ci
+:   BluOS Controller 4.2.0 (non-free)
+: 
 : * packages.x86_64-linux.bluos-controller
 :   BluOS Controller 4.2.0 (non-free)
 : 
@@ -238,7 +245,7 @@ nix --experimental-features \
     "pname": "bluos-controller",
     "version": ""
   },
-  "packages.x86_64-linux.bluos-controller": {
+  "legacyPackages.x86_64-linux.ci": {
     "description": "BluOS Controller 4.2.0 (non-free)",
     "pname": "bluos-controller",
 …
@@ -303,7 +310,7 @@ nix-build --attr <<get("package-attr-long")>> .
 #+end_src
 
 #+RESULTS: nix-build
-: /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+: /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 If we omit the path to a Nix file, =nix-build= will try to build =default.nix=
 in the current directory. If we omit the =--attr= switch and argument,
@@ -326,7 +333,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+: /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -553,6 +560,7 @@ nix-env --profile /tmp/nix-profile \
 
 #+RESULTS: nix-env-install
 : installing 'bluos-controller'
+: building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 
 We can see this installation by querying what's been installed:
 
@@ -590,6 +598,11 @@ nix --experimental-features nix-command \
 #+RESULTS: nix-search-2
 #+begin_example
 {
+  "legacyPackages.x86_64-linux.ci": {
+    "description": "BluOS Controller 4.2.0 (non-free)",
+    "pname": "bluos-controller",
+    "version": ""
+  },
   "packages.x86_64-linux.bluos-controller": {
     "description": "BluOS Controller 4.2.0 (non-free)",
     "pname": "bluos-controller",

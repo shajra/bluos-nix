@@ -292,6 +292,9 @@ nix search . | ansifilter
 : 
 : * packages.x86_64-linux.default
 :   BluOS Controller 4.2.0 (non-free)
+: 
+: * legacyPackages.x86_64-linux.ci
+:   BluOS Controller 4.2.0 (non-free)
 
 If a flake has a lot of packages, you can pass regexes to prune down the search.
 Returned values will match all the regexes provided. Also, we can search a
@@ -331,7 +334,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal | ansifilter
 ,* legacyPackages.x86_64-linux.kitty (0.31.0)
   A modern, hackable, featureful, OpenGL based terminal emulator
 
-,* legacyPackages.x86_64-linux.rio (0.0.32)
+,* legacyPackages.x86_64-linux.rio (0.0.33)
   A hardware-accelerated GPU terminal emulator powered by WebGPU
 
 ,* legacyPackages.x86_64-linux.wezterm (20230712-072601-f4abf8fd)
@@ -382,6 +385,9 @@ nix search . '<<get("package-attr-short")>>' | ansifilter
 : 
 : * packages.x86_64-linux.default
 :   BluOS Controller 4.2.0 (non-free)
+: 
+: * legacyPackages.x86_64-linux.ci
+:   BluOS Controller 4.2.0 (non-free)
 
 We can see that a package can be accessed with the {{{package-attr-long}}}
 output attribute path of the project's flake. Not shown in the search results
@@ -430,7 +436,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+: /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -459,7 +465,7 @@ nix path-info .#<<get("package-attr-short")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+: /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 ** Running commands in a shell
 
@@ -619,7 +625,7 @@ nix shell --ignore-environment \
 #+end_src
 
 #+RESULTS: nix-shell-remote
-: /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller/bin/bluos-controller
+: /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller/bin/bluos-controller
 
 This is all a consequence of everything discussed in previous sections, but it's
 good to see clearly that what we do with local flake references can work just as
@@ -671,7 +677,7 @@ nix profile list --profile /tmp/nix-profile
 : Flake attribute:    packages.x86_64-linux.bluos-controller
 : Original flake URL: git+file:///home/tnks/src/shajra/bluos-nix
 : Locked flake URL:   git+file:///home/tnks/src/shajra/bluos-nix
-: Store paths:        /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+: Store paths:        /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from
 this list:

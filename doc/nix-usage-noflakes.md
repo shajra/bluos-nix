@@ -79,11 +79,13 @@ nix --extra-experimental-features nix-command search --file . ''
     * default
       BluOS Controller 4.2.0 (non-free)
     
+    * legacyPackages.x86_64-linux.ci
+      BluOS Controller 4.2.0 (non-free)
+    
     * packages.x86_64-linux.bluos-controller
       BluOS Controller 4.2.0 (non-free)
     
-    * packages.x86_64-linux.default
-      BluOS Controller 4.2.0 (non-free)
+    …
 
 If you have the `nix-command` feature disabled, and typing out `nix --extra-experimental-features nix-command` is too verbose for your tastes, consider setting an alias in your shell such as the following:
 
@@ -102,6 +104,9 @@ nix --extra-experimental-features nix-command \
     search --file . '' linux bluos-controller
 ```
 
+    * legacyPackages.x86_64-linux.ci
+      BluOS Controller 4.2.0 (non-free)
+    
     * packages.x86_64-linux.bluos-controller
       BluOS Controller 4.2.0 (non-free)
     
@@ -121,7 +126,7 @@ nix --extra-experimental-features \
         "pname": "bluos-controller",
         "version": ""
       },
-      "packages.x86_64-linux.bluos-controller": {
+      "legacyPackages.x86_64-linux.ci": {
         "description": "BluOS Controller 4.2.0 (non-free)",
         "pname": "bluos-controller",
     …
@@ -158,7 +163,7 @@ We can build this package with `nix-build` from the project root:
 nix-build --attr packages.x86_64-linux.bluos-controller .
 ```
 
-    /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+    /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 If we omit the path to a Nix file, `nix-build` will try to build `default.nix` in the current directory. If we omit the `--attr` switch and argument, `nix-build` will try to build packages it finds in the root of the attribute tree.
 
@@ -170,7 +175,7 @@ The output of `nix-build` shows us where in `/nix/store` our package has been bu
 readlink result*
 ```
 
-    /nix/store/s1k9cj1w29xndsdch4fd69hpafwc4v8d-bluos-controller
+    /nix/store/s64171m1hdirrf9kqc5zvjadz3w7qky6-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -302,6 +307,7 @@ nix-env --install --file . --attr packages.x86_64-linux.bluos-controller 2>&1
 ```
 
     installing 'bluos-controller'
+    building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 
 We can see this installation by querying what's been installed:
 
@@ -321,6 +327,11 @@ nix --extra-experimental-features nix-command \
 ```
 
     {
+      "legacyPackages.x86_64-linux.ci": {
+        "description": "BluOS Controller 4.2.0 (non-free)",
+        "pname": "bluos-controller",
+        "version": ""
+      },
       "packages.x86_64-linux.bluos-controller": {
         "description": "BluOS Controller 4.2.0 (non-free)",
         "pname": "bluos-controller",
