@@ -414,7 +414,7 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    Index:              [1m0[0m
+    Index:              0
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/tnks/src/shajra/bluos-nix
     Locked flake URL:   git+file:///home/tnks/src/shajra/bluos-nix
