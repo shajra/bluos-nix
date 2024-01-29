@@ -11,15 +11,15 @@
 
 This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
 
-The "main" branch provides the latest release of 4.2.0 of the controller. See "old/\*" branches for older versions.
+The "main" branch provides the latest release of 4.2.0 of the controller.
 
-This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability, in this case enabled by some relatively light patching.
+This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability, which we get with light patching.
 
 This project is only tested against Linux and does not work on MacOS. Use the official BluOS distributions for MacOS or any other platform.
 
 # Building, packaging, and distributing with Nix<a id="sec-2"></a>
 
-Projects such as this one have been birthed by [a post on the official BluOS support forum](https://support1.bluesound.com/hc/en-us/community/posts/360033533054-BluOS-controller-app-on-Linux). There's a few projects that do what this project does, but without Nix. Here's a comparison with two of them:
+Projects such as this one have been birthed by [a post on the official BluOS support forum](https://support1.bluesound.com/hc/en-us/community/posts/360033533054-BluOS-controller-app-on-Linux). A few projects do what this project does but without Nix. Here's a comparison of three of them:
 
 | Project                                                                                                     | Dependencies                                   | Outputs        |
 |----------------------------------------------------------------------------------------------------------- |---------------------------------------------- |-------------- |
@@ -28,16 +28,16 @@ Projects such as this one have been birthed by [a post on the official BluOS sup
 | [fabrice.aeschbacher/bluos-controller-linux](https://gitlab.com/fabrice.aeschbacher/bluos-controller-linux) | P7ZIP+NodeJS/NPM+…                             | AppImage       |
 | This project                                                                                                | Nix package manager                            | Nix package    |
 
-Nix is a package manager we can use to both build and install the controller. NixOS is a distribution that uses this package manager, but we can install Nix on any Linux distribution. Nix can install with not worry of conflict alongside other package managers such as APT, Yum, Pacman, etc.
+Nix is a package manager we can use to both build and install the controller. NixOS is a distribution that uses this package manager, but we can install Nix on any Linux distribution. Nix, by design, installs packages without conflicts with other package managers such as APT, Yum, Pacman, etc.
 
-A primary motivation to use Nix is to reduce build dependencies. This is not dissimilar from the optional usage of Podman or Docker of `bs-bashpatch`, but Nix offers an architecture for reproducible builds well above what Podman or Docker can accomplish. If you're new to Nix this project bundles a few guides to get you started:
+A primary motivation to use Nix is to reduce build dependencies. This approach is not dissimilar from the optional usage of Podman or Docker of `bs-bashpatch`, but Nix offers an architecture for reproducible builds well above what Podman or Docker can accomplish. If you're new to Nix, this project bundles a few guides to get you started:
 
 -   [Introduction to Nix and motivations to use it](doc/nix-introduction.md)
 -   [Nix installation and configuration guide](doc/nix-installation.md)
 -   [Nix end user guide](doc/nix-usage-flakes.md)
 -   [Introduction to the Nix programming language](doc/nix-language.md)
 
-Ultimately, we're trading complexity. You take on the complexity of installing the Nix package manager (or running NixOS). After that projects like this can more easily build applications without you having to worry about having the right software installed and configured. All you need is Nix.
+Ultimately, we're trading complexity. You take on the complexity of installing the Nix package manager (or running NixOS). After that, projects like this can more easily build applications without you having to worry about having the right software installed and configured. All you need is Nix.
 
 # Usage<a id="sec-3"></a>
 
@@ -55,7 +55,7 @@ We generally start the controller with no arguments.
 
 Sometimes it gets a little stuck. If this happens, try hitting `ctrl-r` to reset the application. You can also type `Alt` to see the Electron menu (auto-hidden by default).
 
-The controller is wrapped by `daemon` as a convenience for job control. This way you can have confidence that only one instance is running at a time. Also, you don't have to deal with backgrounding processes or redirecting standard output/error.
+The controller is wrapped by `daemon` as a convenience for job control, ensuring that only one instance runs at a time. Also, you don't have to deal with backgrounding processes or redirecting standard output/error.
 
 You can call the controller with `--help` or `--help-daemon` for more details:
 
@@ -92,11 +92,11 @@ The "old/\*" branches have older versions of BluOS controller. There might be a 
 
 # License<a id="sec-5"></a>
 
-This is repackaging of proprietary software. It is safe to assume that BluOS controls the terms for all copying, modification, and distribution. The copyright is entirely theirs. To my knowledge, there is no license for usage.
+This project repackages proprietary software. It is safe to assume that Bluesound controls all copying, modification, and distribution terms. The copyright is entirely theirs. To my knowledge, there is no license for usage.
 
-Obviously, BluOS wants people to download their official software for use. But it's not clear to what degree they support unofficial repackaging. They could request projects like this to cease and desist. But the more likely scenario is that they are happy to have a community help out with something they don't have time for.
+Clearly, Bluesound wants people to download their official software for use. But it's not clear to what degree they support unofficial repackaging. They could request projects like this to cease and desist. But the more likely scenario is that they are happy to have a community help with something they don't have time for.
 
-An additional benefit to them is not having to support Linux officially. If any of these repackaging projects has a problem, the burden of fixing it falls on the packager, and not on BluOS. That extends to damages and liabilities as well. But don't worry about that too much. The patching this project does is small, and it's ultimately just a music management application that talks a little over the network.
+An additional benefit to them is not having to support Linux officially. If any of these repackaging projects has a problem, the burden of fixing it falls on the packager, not Bluesound. That extends to damages and liabilities as well. But don't worry about that too much. This project's patching is minor, and it's ultimately just a music management application that talks a little over the network.
 
 # Contribution<a id="sec-6"></a>
 
