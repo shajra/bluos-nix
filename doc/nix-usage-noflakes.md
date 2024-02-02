@@ -77,13 +77,13 @@ nix --extra-experimental-features nix-command search --file . ''
 ```
 
     * default
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
     
     * legacyPackages.x86_64-linux.ci
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
     
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
     
     …
 
@@ -105,13 +105,13 @@ nix --extra-experimental-features nix-command \
 ```
 
     * legacyPackages.x86_64-linux.ci
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
     
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.2.0 (non-free)
+      BluOS Controller 4.2.1 (non-free)
 
 We can also use `--json` to get more details about found packages:
 
@@ -122,12 +122,12 @@ nix --extra-experimental-features \
 
     {
       "default": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       },
       "legacyPackages.x86_64-linux.ci": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
     …
 
@@ -149,7 +149,7 @@ The following result is one returned by an execution of `nix search` or tab-comp
 
     {
       "packages.x86_64-linux.bluos-controller": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       }
@@ -163,7 +163,7 @@ We can build this package with `nix-build` from the project root:
 nix-build --attr packages.x86_64-linux.bluos-controller .
 ```
 
-    /nix/store/n6qb9w63r10js6n8jyr7h7hrq3ngaggf-bluos-controller
+    /nix/store/g4j3np439h4mr0z4zb9rlhyk6hhwl6bz-bluos-controller
 
 If we omit the path to a Nix file, `nix-build` will try to build `default.nix` in the current directory. If we omit the `--attr` switch and argument, `nix-build` will try to build packages it finds in the root of the attribute tree.
 
@@ -175,7 +175,7 @@ The output of `nix-build` shows us where in `/nix/store` our package has been bu
 readlink result*
 ```
 
-    /nix/store/n6qb9w63r10js6n8jyr7h7hrq3ngaggf-bluos-controller
+    /nix/store/g4j3np439h4mr0z4zb9rlhyk6hhwl6bz-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -241,7 +241,7 @@ nix --extra-experimental-features \
 
     {
       "packages.x86_64-linux.bluos-controller": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       }
@@ -328,17 +328,17 @@ nix --extra-experimental-features nix-command \
 
     {
       "legacyPackages.x86_64-linux.ci": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       },
       "packages.x86_64-linux.bluos-controller": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       },
       "packages.x86_64-linux.default": {
-        "description": "BluOS Controller 4.2.0 (non-free)",
+        "description": "BluOS Controller 4.2.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""
       }
