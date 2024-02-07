@@ -1,5 +1,5 @@
 { bc
-, bluos-controller-unasar-unpatched
+, bluos-controller-linux-patched
 , coreutils
 , daemon
 , electron
@@ -13,8 +13,8 @@
 let
 
     meta.description = "BluOS Controller ${version} (non-free)";
-    meta.platforms = lib.platforms.linux;
-    app = bluos-controller-unasar-unpatched;
+    meta.platforms = lib.platforms.linux ++ lib.platforms.darwin;
+    app = "${bluos-controller-linux-patched}/bin/bluos-controller";
 
 in nix-project-lib.writeShellCheckedExe pname
 {

@@ -4,17 +4,19 @@ final: prev:
 let
 
     system = prev.stdenv.hostPlatform.system;
-    patches = [ ./patches/${meta.version}-linux.patch ];
+    bluos-controller = { bluos-controller-darwin, bluos-controller-linux, stdenv }:
+        if stdenv.isDarwin
+        then bluos-controller-darwin
+        else bluos-controller-linux;
 
 in withSystem system ({ inputs', ... }: {
-    inherit (inputs) bluos-controller-packed;
+    inherit (inputs) bluos-controller-win-zip bluos-controller-mac-zip;
     nix-project-lib = inputs'.nix-project.legacyPackages.lib.scripts;
     org2gfm = inputs'.nix-project.packages.org2gfm;
-    bluos-controller-unpacked = final.callPackage ./unexe.nix {} meta;
-    bluos-controller-unasar-patched
-        = final.callPackage ./unasar.nix {} meta patches;
-    bluos-controller-unasar-unpatched
-        = final.callPackage ./unasar.nix {} meta [];
-    bluos-controller
-        = final.callPackage ./wrapper.nix {} meta;
+    bluos-controller-linux-unpacked  = final.callPackage ./unexe.nix  {} meta;
+    bluos-controller-linux-patched   = final.callPackage ./linux.nix  {} meta;
+    bluos-controller-linux           = final.callPackage ./daemon.nix {} meta;
+    bluos-controller-darwin-unpacked = final.callPackage ./undmg.nix  {} meta;
+    bluos-controller-darwin          = final.callPackage ./darwin.nix {} meta;
+    bluos-controller                 = final.callPackage bluos-controller {};
 })

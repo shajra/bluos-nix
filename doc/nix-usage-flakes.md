@@ -33,7 +33,11 @@ Within this project, the various files with a `.nix` extension are Nix files, ea
 
 If you're new to Nix consider reading the provided [introduction](nix-introduction.md).
 
-This project supports Linux on x86-64 machines.
+This project supports
+
+-   Linux on x86-64 machines
+-   MacOS on x86-64 machines
+-   MacOS on ARM64 machines (M1 or M2).
 
 That may affect your ability to follow along with examples.
 
@@ -109,14 +113,25 @@ nix flake show .
 
     git+file:///home/tnks/src/shajra/bluos-nix
     ├───apps
+    │   ├───aarch64-darwin
+    …
+    │   │   └───default: app
     │   └───x86_64-linux
     │       ├───bluos-controller: app
     │       └───default: app
     ├───legacyPackages
+    │   ├───aarch64-darwin omitted (use '--legacy' to show)
+    │   ├───x86_64-darwin omitted (use '--legacy' to show)
     │   └───x86_64-linux omitted (use '--legacy' to show)
     ├───overlays
     │   └───default: Nixpkgs overlay
     └───packages
+        ├───aarch64-darwin
+        │   ├───bluos-controller omitted (use '--all-systems' to show)
+        │   └───default omitted (use '--all-systems' to show)
+        ├───x86_64-darwin
+        │   ├───bluos-controller omitted (use '--all-systems' to show)
+        │   └───default omitted (use '--all-systems' to show)
         └───x86_64-linux
             ├───bluos-controller: package 'bluos-controller'
             └───default: package 'bluos-controller'
@@ -260,7 +275,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+    /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -282,7 +297,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+    /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -395,7 +410,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller/bin/bluos-controller
+    /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake references.
 
@@ -423,7 +438,7 @@ nix profile list
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/tnks/src/shajra/bluos-nix
     Locked flake URL:   git+file:///home/tnks/src/shajra/bluos-nix
-    Store paths:        /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+    Store paths:        /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from this list:
 

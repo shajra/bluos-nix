@@ -1,21 +1,19 @@
-{ bluos-controller-unpacked
+{ bluos-controller-linux-unpacked
 , nodePackages
 , stdenv
 }:
 { pname
 , version
 }:
-patches:
 
 stdenv.mkDerivation {
     pname = "${pname}-appimage";
-    inherit version patches;
-    src = bluos-controller-unpacked;
-    patchFlags = [ "-p1" ];
+    inherit version;
+    src = bluos-controller-linux-unpacked;
     nativeBuildInputs = [
         nodePackages.asar
     ];
-    phases = ["unpackPhase" "patchPhase" "postPhase" "installPhase"];
+    phases = ["unpackPhase" "postPhase" "installPhase"];
     postPhase = ''
         substituteInPlace common/analyticsServer.js \
             --replace \

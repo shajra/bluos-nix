@@ -4,8 +4,12 @@
     inputs = {
         flake-parts.url = github:hercules-ci/flake-parts;
         nix-project.url = github:shajra/nix-project;
-        bluos-controller-packed = {
+        bluos-controller-win-zip = {
             url = https://content-bluesound-com.s3.amazonaws.com/uploads/2024/01/BluOS-Controller-4.2.1-Windows.zip;
+            flake = false;
+        };
+        bluos-controller-mac-zip = {
+            url = https://content-bluesound-com.s3.amazonaws.com/uploads/2024/01/BluOS-Controller-4.2.1-MacOS.zip;
             flake = false;
         };
     };
@@ -15,7 +19,11 @@
             meta.version = "4.2.1";
         in flake-parts.lib.mkFlake { inherit inputs; } ({withSystem, config, ... }: {
             imports = [ nix-project.flakeModules.nixpkgs ];
-            systems = [ "x86_64-linux" ];
+            systems = [
+                "x86_64-linux"
+                "x86_64-darwin"
+                "aarch64-darwin"
+            ];
             perSystem = { system, nixpkgs, ... }:
                 let build = import nixpkgs.stable.path {
                         inherit system;

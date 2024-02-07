@@ -174,12 +174,12 @@ nix --experimental-features nix-command search --file . '' | ansifilter
 ,* default
   BluOS Controller 4.2.1 (non-free)
 
+,* legacyPackages.aarch64-darwin.ci (4.2.1)
+
+,* legacyPackages.x86_64-darwin.ci (4.2.1)
+
 ,* legacyPackages.x86_64-linux.ci
   BluOS Controller 4.2.1 (non-free)
-
-,* packages.x86_64-linux.bluos-controller
-  BluOS Controller 4.2.1 (non-free)
-
 …
 #+end_example
 
@@ -246,9 +246,9 @@ nix --experimental-features \
     "pname": "bluos-controller",
     "version": ""
   },
-  "legacyPackages.x86_64-linux.ci": {
-    "description": "BluOS Controller 4.2.1 (non-free)",
-    "pname": "bluos-controller",
+  "legacyPackages.aarch64-darwin.ci": {
+    "description": "",
+    "pname": "bluos-controller-appimage",
 …
 #+end_example
 
@@ -311,7 +311,7 @@ nix-build --attr <<get("package-attr-long")>> .
 #+end_src
 
 #+RESULTS: nix-build
-: /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+: /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 If we omit the path to a Nix file, =nix-build= will try to build =default.nix=
 in the current directory. If we omit the =--attr= switch and argument,
@@ -334,7 +334,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+: /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -563,6 +563,7 @@ nix-env --profile /tmp/nix-profile \
 
 #+RESULTS: nix-env-install
 : installing 'bluos-controller'
+: building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 
 We can see this installation by querying what's been installed:
 

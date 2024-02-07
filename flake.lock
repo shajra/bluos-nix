@@ -1,6 +1,19 @@
 {
   "nodes": {
-    "bluos-controller-packed": {
+    "bluos-controller-mac-zip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706550524,
+        "narHash": "sha256-ne2s82HuC5nxZHrH8SVaihczZotiOHQG1Sn7IiwP8dU=",
+        "type": "tarball",
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/01/BluOS-Controller-4.2.1-MacOS.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/01/BluOS-Controller-4.2.1-MacOS.zip"
+      }
+    },
+    "bluos-controller-win-zip": {
       "flake": false,
       "locked": {
         "lastModified": 1706550342,
@@ -207,7 +220,8 @@
     },
     "root": {
       "inputs": {
-        "bluos-controller-packed": "bluos-controller-packed",
+        "bluos-controller-mac-zip": "bluos-controller-mac-zip",
+        "bluos-controller-win-zip": "bluos-controller-win-zip",
         "flake-parts": "flake-parts",
         "nix-project": "nix-project"
       }

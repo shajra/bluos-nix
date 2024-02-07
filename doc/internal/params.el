@@ -12,4 +12,7 @@
  ;; run-target-long will always prefix "bin/"
  (nix-latest           . "2.20")
  (nixos-latest         . "23.11")
- (platforms            . "Linux on x86-64 machines"))
+ (platforms            . "\n\
+- Linux on x86-64 machines\n\
+- MacOS on x86-64 machines\n\
+- MacOS on ARM64 machines (M1 or M2)"))

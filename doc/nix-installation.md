@@ -18,7 +18,11 @@ If you're unsure if you want to enable flakes or not, read the provided [introdu
 
 # Prerequisites<a id="sec-2"></a>
 
-This project supports Linux on x86-64 machines.
+This project supports
+
+-   Linux on x86-64 machines
+-   MacOS on x86-64 machines
+-   MacOS on ARM64 machines (M1 or M2).
 
 All we need to use this project is to install Nix, which this document covers. Nix can be installed on a variety of Linux and Mac systems. Nix can also be installed in Windows via the Windows Subsystem for Linux (WSL). Installation on WSL may involve steps not covered in this documentation, though.
 

@@ -36,7 +36,11 @@ Within this project, the various files with a `.nix` extension are Nix files, ea
 
 If you're new to Nix consider reading the provided [introduction](nix-introduction.md).
 
-This project supports Linux on x86-64 machines.
+This project supports
+
+-   Linux on x86-64 machines
+-   MacOS on x86-64 machines
+-   MacOS on ARM64 machines (M1 or M2).
 
 That may affect your ability to follow along with examples.
 
@@ -79,12 +83,12 @@ nix --extra-experimental-features nix-command search --file . ''
     * default
       BluOS Controller 4.2.1 (non-free)
     
+    * legacyPackages.aarch64-darwin.ci (4.2.1)
+    
+    * legacyPackages.x86_64-darwin.ci (4.2.1)
+    
     * legacyPackages.x86_64-linux.ci
       BluOS Controller 4.2.1 (non-free)
-    
-    * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.2.1 (non-free)
-    
     …
 
 If you have disabled the `nix-command` feature, and typing out `nix --extra-experimental-features nix-command` is too verbose for your tastes, consider setting an alias in your shell such as the following:
@@ -126,9 +130,9 @@ nix --extra-experimental-features \
         "pname": "bluos-controller",
         "version": ""
       },
-      "legacyPackages.x86_64-linux.ci": {
-        "description": "BluOS Controller 4.2.1 (non-free)",
-        "pname": "bluos-controller",
+      "legacyPackages.aarch64-darwin.ci": {
+        "description": "",
+        "pname": "bluos-controller-appimage",
     …
 
 Additional data includes the package's name (from the “pname” field), a version string, and a textual description of the package.
@@ -163,7 +167,7 @@ We can build this package with `nix-build` from the project root:
 nix-build --attr packages.x86_64-linux.bluos-controller .
 ```
 
-    /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+    /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 If we omit the path to a Nix file, `nix-build` will try to build `default.nix` in the current directory. If we omit the `--attr` switch and argument, `nix-build` will try to build packages it finds in the root of the attribute tree.
 
@@ -175,7 +179,7 @@ The output of `nix-build` shows us where in `/nix/store` our package has been bu
 readlink result*
 ```
 
-    /nix/store/cgwlgpbvljj226wyjk1f66xmhqhjn4fq-bluos-controller
+    /nix/store/rd078cyq977nwwjavjg7blc3y2j339v1-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -307,6 +311,7 @@ nix-env --install --file . --attr packages.x86_64-linux.bluos-controller 2>&1
 ```
 
     installing 'bluos-controller'
+    building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 
 We can see this installation by querying what's been installed:
 

@@ -1,4 +1,4 @@
-{ bluos-controller-packed
+{ bluos-controller-mac-zip
 , stdenv
 , undmg
 }:
@@ -9,7 +9,7 @@
 stdenv.mkDerivation {
     pname = "${pname}-undmg";
     inherit version;
-    src = bluos-controller-packed;
+    src = bluos-controller-mac-zip;
     nativeBuildInputs = [ undmg ];
     unpackPhase = ''
         undmg "$src"

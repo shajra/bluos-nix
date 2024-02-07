@@ -9,13 +9,13 @@
 
 # About this project<a id="sec-1"></a>
 
-This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
+This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux and Macs. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
 
 The "main" branch provides the latest release of 4.2.1 of the controller.
 
-This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability, which we get with light patching.
+This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability. The Linux packaging has some light patching. The Mac packaging has no patching, and is merely redistribution through Nix.
 
-This project is only tested against Linux and does not work on MacOS. Use the official BluOS distributions for MacOS or any other platform.
+This project is only tested against both Linux and MacOS. Use the official BluOS distributions for Windows.
 
 # Building, packaging, and distributing with Nix<a id="sec-2"></a>
 
@@ -55,9 +55,9 @@ We generally start the controller with no arguments.
 
 Sometimes it gets a little stuck. If this happens, try hitting `ctrl-r` to reset the application. You can also type `Alt` to see the Electron menu (auto-hidden by default).
 
-The controller is wrapped by `daemon` as a convenience for job control, ensuring that only one instance runs at a time. Also, you don't have to deal with backgrounding processes or redirecting standard output/error.
+The Linux version is wrapped by `daemon` as a convenience for job control, ensuring that only one instance runs at a time. Also, you don't have to deal with backgrounding processes or redirecting standard output/error.
 
-You can call the controller with `--help` or `--help-daemon` for more details:
+You can call the Linux controller with `--help` or `--help-daemon` for more details:
 
 ```sh
 bluos-controller --help

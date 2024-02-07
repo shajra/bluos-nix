@@ -1,4 +1,4 @@
-{ bluos-controller-packed
+{ bluos-controller-win-zip
 , stdenv
 , p7zip
 }:
@@ -9,7 +9,7 @@
 stdenv.mkDerivation {
     pname = "${pname}-unexe";
     inherit version;
-    src = bluos-controller-packed;
+    src = bluos-controller-win-zip;
     nativeBuildInputs = [ p7zip ];
     phases = [ "unpackPhase" ];
     unpackPhase = ''
