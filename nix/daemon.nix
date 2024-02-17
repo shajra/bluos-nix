@@ -14,7 +14,7 @@ let
 
     meta.description = "BluOS Controller ${version} (non-free)";
     meta.platforms = lib.platforms.linux ++ lib.platforms.darwin;
-    app = "${bluos-controller-linux-patched}/bin/bluos-controller";
+    app = "${bluos-controller-linux-patched}";
 
 in nix-project-lib.writeShellCheckedExe pname
 {
