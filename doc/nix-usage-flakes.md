@@ -111,7 +111,7 @@ We can use `nix flake show` to see the outputs provided by any flake, local or r
 nix flake show .
 ```
 
-    git+file:///home/tnks/src/shajra/bluos-nix
+    git+file:///home/shajra/src/bluos-nix
     ├───apps
     │   ├───aarch64-darwin
     …
@@ -436,8 +436,8 @@ nix profile list
 
     Index:              0
     Flake attribute:    packages.x86_64-linux.bluos-controller
-    Original flake URL: git+file:///home/tnks/src/shajra/bluos-nix
-    Locked flake URL:   git+file:///home/tnks/src/shajra/bluos-nix
+    Original flake URL: git+file:///home/shajra/src/bluos-nix
+    Locked flake URL:   git+file:///home/shajra/src/bluos-nix
     Store paths:        /nix/store/q0i08j8s7igwh1c6ahsl8x4p1vvp3zzk-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from this list:
