@@ -447,7 +447,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/l66nib6rzjxsw2ryfhwmd7z2lgrmy7h1-bluos-controller
+: /nix/store/7ad5dp7x2qpsx9fs31yxhsn8rcr4fbwm-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -476,7 +476,7 @@ nix path-info .#<<get("package-attr-short")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/l66nib6rzjxsw2ryfhwmd7z2lgrmy7h1-bluos-controller
+: /nix/store/7ad5dp7x2qpsx9fs31yxhsn8rcr4fbwm-bluos-controller
 
 ** Running commands in a shell
 
@@ -638,7 +638,7 @@ nix shell --ignore-environment \
 #+end_src
 
 #+RESULTS: nix-shell-remote
-: /nix/store/l66nib6rzjxsw2ryfhwmd7z2lgrmy7h1-bluos-controller/bin/bluos-controller
+: /nix/store/7ad5dp7x2qpsx9fs31yxhsn8rcr4fbwm-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake
 references.
@@ -689,7 +689,7 @@ nix profile list --profile /tmp/nix-profile | ansifilter
 : Flake attribute:    packages.x86_64-linux.bluos-controller
 : Original flake URL: git+file:///home/shajra/src/bluos-nix
 : Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-: Store paths:        /nix/store/l66nib6rzjxsw2ryfhwmd7z2lgrmy7h1-bluos-controller
+: Store paths:        /nix/store/7ad5dp7x2qpsx9fs31yxhsn8rcr4fbwm-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from
 this list:
