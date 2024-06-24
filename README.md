@@ -7,11 +7,13 @@
 
 [![img](https://github.com/shajra/bluos-nix/workflows/CI/badge.svg)](https://github.com/shajra/bluos-nix/actions)
 
+[![img](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fshajra%2Fbluos-nix%3Fbranch%3Dmain)](https://garnix.io)
+
 # About this project<a id="sec-1"></a>
 
 This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux and Macs. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
 
-The "main" branch provides the latest release of 4.4.0 of the controller.
+The "main" branch provides the latest release of 4.4.1 of the controller.
 
 This project is unofficial. The official distribution is only for Windows, Macs, and mobile devices. However, it turns out that it's implemented as an [Electron](https://electronjs.org) application, which lends to portability. The Linux packaging has some light patching. The Mac packaging has no patching, and is merely redistribution through Nix.
 
