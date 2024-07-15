@@ -115,10 +115,10 @@ nix flake show .
     ├───apps
     │   ├───aarch64-darwin
     …
-    │   │   └───default: app
+    │   ├───x86_64-darwin
+    │   │   └───ci omitted (use '--all-systems' to show)
     │   └───x86_64-linux
-    │       ├───bluos-controller: app
-    │       └───default: app
+    │       └───ci: derivation 'bluos-controller'
     ├───legacyPackages
     │   ├───aarch64-darwin omitted (use '--legacy' to show)
     │   ├───x86_64-darwin omitted (use '--legacy' to show)
@@ -185,9 +185,6 @@ nix search .
     
     * packages.x86_64-linux.default
       BluOS Controller 4.4.1 (non-free)
-    
-    * legacyPackages.x86_64-linux.ci
-      BluOS Controller 4.4.1 (non-free)
 
 If a flake has a lot of packages, you can pass regexes to prune down the search. Returned values will match all the regexes provided.
 
@@ -244,9 +241,6 @@ The following result is one returned by our prior execution of `nix search .`:
       BluOS Controller 4.4.1 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.4.1 (non-free)
-    
-    * legacyPackages.x86_64-linux.ci
       BluOS Controller 4.4.1 (non-free)
 
 We can see that a package can be accessed with the `packages.x86_64-linux.bluos-controller` output attribute path of the project's flake. Not shown in the search results above, this package happens to provide the executable `bin/bluos-controller`.

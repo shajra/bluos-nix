@@ -203,10 +203,10 @@ git+file:///home/shajra/src/bluos-nix
 ├───apps
 │   ├───aarch64-darwin
 …
-│   │   └───default: app
+│   ├───x86_64-darwin
+│   │   └───ci omitted (use '--all-systems' to show)
 │   └───x86_64-linux
-│       ├───bluos-controller: app
-│       └───default: app
+│       └───ci: derivation 'bluos-controller'
 ├───legacyPackages
 │   ├───aarch64-darwin omitted (use '--legacy' to show)
 │   ├───x86_64-darwin omitted (use '--legacy' to show)
@@ -304,9 +304,6 @@ nix search . | ansifilter
 : 
 : * packages.x86_64-linux.default
 :   BluOS Controller 4.4.1 (non-free)
-: 
-: * legacyPackages.x86_64-linux.ci
-:   BluOS Controller 4.4.1 (non-free)
 
 If a flake has a lot of packages, you can pass regexes to prune down the search.
 Returned values will match all the regexes provided.
@@ -395,9 +392,6 @@ nix search . '<<get("package-attr-short")>>' | ansifilter
 :   BluOS Controller 4.4.1 (non-free)
 : 
 : * packages.x86_64-linux.default
-:   BluOS Controller 4.4.1 (non-free)
-: 
-: * legacyPackages.x86_64-linux.ci
 :   BluOS Controller 4.4.1 (non-free)
 
 We can see that a package can be accessed with the {{{package-attr-long}}}

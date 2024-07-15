@@ -83,12 +83,12 @@ nix --extra-experimental-features nix-command search --file . ''
     * default
       BluOS Controller 4.4.1 (non-free)
     
-    * legacyPackages.aarch64-darwin.ci (4.4.1)
+    * packages.aarch64-darwin.bluos-controller (4.4.1)
     
-    * legacyPackages.x86_64-darwin.ci (4.4.1)
+    * packages.aarch64-darwin.default (4.4.1)
     
-    * legacyPackages.x86_64-linux.ci
-      BluOS Controller 4.4.1 (non-free)
+    * packages.x86_64-darwin.bluos-controller (4.4.1)
+    
     …
 
 If you have disabled the `nix-command` feature, and typing out `nix --extra-experimental-features nix-command` is too verbose for your tastes, consider setting an alias in your shell such as the following:
@@ -108,9 +108,6 @@ nix --extra-experimental-features nix-command \
     search --file . '' linux bluos-controller
 ```
 
-    * legacyPackages.x86_64-linux.ci
-      BluOS Controller 4.4.1 (non-free)
-    
     * packages.x86_64-linux.bluos-controller
       BluOS Controller 4.4.1 (non-free)
     
@@ -130,7 +127,7 @@ nix --extra-experimental-features \
         "pname": "bluos-controller",
         "version": ""
       },
-      "legacyPackages.aarch64-darwin.ci": {
+      "packages.aarch64-darwin.bluos-controller": {
         "description": "",
         "pname": "bluos-controller-appimage",
     …
@@ -331,11 +328,6 @@ nix --extra-experimental-features nix-command \
 ```
 
     {
-      "legacyPackages.x86_64-linux.ci": {
-        "description": "BluOS Controller 4.4.1 (non-free)",
-        "pname": "bluos-controller",
-        "version": ""
-      },
       "packages.x86_64-linux.bluos-controller": {
         "description": "BluOS Controller 4.4.1 (non-free)",
         "pname": "bluos-controller",
