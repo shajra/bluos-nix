@@ -49,5 +49,6 @@ in stdenv.mkDerivation {
         cp -r . "$out"
         mkdir --parents "$out/resources"
         cp -r "$src/resources/analytics" "$out/resources"
+        exit 1
     '';
 }

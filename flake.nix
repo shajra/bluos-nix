@@ -40,7 +40,6 @@
                         };
                     };
                     checks.ci         = build.bluos-controller;
-                    legacyPackages.ci = build.bluos-controller;
                     legacyPackages.nixpkgs = build;
                 };
             flake.overlays.default =
