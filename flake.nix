@@ -39,8 +39,9 @@
                             program = "${build.bluos-controller}/bin/bluos-controller";
                         };
                     };
-                    legacyPackages.nixpkgs = build;
+                    checks.ci         = build.bluos-controller;
                     legacyPackages.ci = build.bluos-controller;
+                    legacyPackages.nixpkgs = build;
                 };
             flake.overlays.default =
                 import nix/overlay.nix inputs withSystem meta;
