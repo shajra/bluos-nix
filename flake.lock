@@ -89,11 +89,11 @@
         "ox-gfm": "ox-gfm"
       },
       "locked": {
-        "lastModified": 1731010740,
-        "narHash": "sha256-bIe6S+P6s6RwwCUahTTbu4EcIsuafZFnwerP2okVFhg=",
+        "lastModified": 1731014811,
+        "narHash": "sha256-VLNWmOQPJmhKx1/joSxVAss9NTz/65Q3rTtvtgSUaes=",
         "owner": "shajra",
         "repo": "nix-project",
-        "rev": "4c41db9048dcf574f438fb41388984216790628d",
+        "rev": "00a841d0f3d2b7f36a9842b4944a06317c4c4b07",
         "type": "github"
       },
       "original": {
@@ -128,11 +128,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1731010162,
-        "narHash": "sha256-N9p842EUdFTWlDr1aYQ/AH82cyOkQhJSk75TaseRxdw=",
+        "lastModified": 1731014060,
+        "narHash": "sha256-tZuFUzL54iah1IIdgDInc7yE5J8u9TKBE+aqpdC9Wuk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c8ce709a65f77d7ef919a09719ff6c9e45e538a7",
+        "rev": "5c687a95f1aa178be3f679d359074aa9dcaf3b2d",
         "type": "github"
       },
       "original": {
