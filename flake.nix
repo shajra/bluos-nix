@@ -2,14 +2,14 @@
     description = "BluOS Controller (non-free)";
 
     inputs = {
-        flake-parts.url = github:hercules-ci/flake-parts;
-        nix-project.url = github:shajra/nix-project;
+        flake-parts.url = "github:hercules-ci/flake-parts";
+        nix-project.url = "github:shajra/nix-project";
         bluos-controller-win-zip = {
-            url = https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-Windows.zip;
+            url = "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-Windows.zip";
             flake = false;
         };
         bluos-controller-mac-zip = {
-            url = https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-MacOS.zip;
+            url = "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-MacOS.zip";
             flake = false;
         };
     };
