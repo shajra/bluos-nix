@@ -12,7 +12,8 @@ stdenv.mkDerivation {
     src = bluos-controller-mac-zip;
     nativeBuildInputs = [ undmg ];
     unpackPhase = ''
-        undmg "$src"
+        ls -la "$src"
+        undmg "$src/"*.dmg
     '';
     installPhase = ''
         mkdir "$out"
