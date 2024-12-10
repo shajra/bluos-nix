@@ -77,7 +77,7 @@ Though experimental, the command `nix search` is safe and helpful. Just be aware
 We can use an `--extra-experimental-features nix-command` switch to use an experimental feature with `nix` for a single call. Putting this all together, this is how we'd search the provided `default.nix` file:
 
 ```sh
-nix --extra-experimental-features nix-command search --file . ''
+nix --extra-experimental-features nix-command search --file . '' ^
 ```
 
     * default
@@ -97,11 +97,13 @@ If you have disabled the `nix-command` feature, and typing out `nix --extra-expe
 alias nix-new = nix --extra-experimental-features 'nix-command'
 ```
 
-Passing in `--file .` tells `nix search` to get the attribute tree to search from the `default.nix` file in the current directory. The positional argument is the attribute path to start the search from within this tree. An empty string indicates to start at the root of the tree.
+Passing in `--file .` tells `nix search` to get the attribute tree to search from the `default.nix` file in the current directory.
+
+The first positional argument is the attribute path to start the search from within this tree. An empty string indicates to start at the root of the tree.
+
+Remaining arguments are regexes to filter our search results with. Above we've passed `^` to match everything and return all results.
 
 Note, there are some projects for which `nix search` won't work. These projects require extra approaches to work with `nix search` that are beyond the scope of this document. You can still navigate these projects' attribute tree with `nix repl`. Or you can try to read the source code of the Nix expressions.
-
-We can filter search results down by supplying regexes as an additional position parameters:
 
 ```sh
 nix --extra-experimental-features nix-command \
@@ -118,7 +120,7 @@ We can also use `--json` to get more details about found packages:
 
 ```sh
 nix --extra-experimental-features \
-    nix-command search --json --file . '' | jq .
+    nix-command search --json --file . '' ^ | jq .
 ```
 
     {
@@ -164,7 +166,7 @@ We can build this package with `nix-build` from the project root:
 nix-build --attr packages.x86_64-linux.bluos-controller .
 ```
 
-    /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+    /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 If we omit the path to a Nix file, `nix-build` will try to build `default.nix` in the current directory. If we omit the `--attr` switch and argument, `nix-build` will try to build packages it finds in the root of the attribute tree.
 
@@ -176,7 +178,7 @@ The output of `nix-build` shows us where in `/nix/store` our package has been bu
 readlink result*
 ```
 
-    /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+    /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -237,11 +239,11 @@ Remember, the package's *name* is not the same as the *attribute* used to select
 
 ```sh
 nix --extra-experimental-features \
-    nix-command search --file . '' --json 'packages.x86_64-linux.bluos-controller' | jq .
+    nix-command search --file . --json 'packages.x86_64-linux.bluos-controller' ^ | jq .
 ```
 
     {
-      "packages.x86_64-linux.bluos-controller": {
+      "": {
         "description": "BluOS Controller 4.4.1 (non-free)",
         "pname": "bluos-controller",
         "version": ""

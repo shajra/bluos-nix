@@ -290,12 +290,12 @@ We can use the =nix search= command to see what package derivations a flake
 contains. For example, from the root directory of this project, we can execute:
 
 #+begin_src sh :eval no
-nix search .
+nix search . ^
 #+end_src
 
 #+name: nix-search-local
 #+begin_src sh :dir .. :results output :exports results :post crop(text=*this*, first-n=9, last-n=0)
-nix search . | ansifilter
+nix search . ^ | ansifilter
 #+end_src
 
 #+results: nix-search-local
@@ -305,8 +305,8 @@ nix search . | ansifilter
 : * packages.x86_64-linux.default
 :   BluOS Controller 4.4.1 (non-free)
 
-If a flake has a lot of packages, you can pass regexes to prune down the search.
-Returned values will match all the regexes provided.
+We're required to pass regexes as final arguments to prune down the search.
+Above we've passed =^= to match everything and return all results.
 
 We can also search a remote repository for packages to install.  For example,
 Nixpkgs is a central repository for Nix, providing several thousand packages. We
@@ -353,12 +353,12 @@ If we're curious about what version of WezTerm is available in NixOS's latest
 release, we can specialize the installable we're searching as follows:
 
 #+begin_src sh :eval no :noweb yes
-nix search nixpkgs/nixos-<<get("nixos-latest")>>#wezterm
+nix search nixpkgs/nixos-<<get("nixos-latest")>>#wezterm ^
 #+end_src
 
 #+name: nix-search-remote-wezterm
 #+begin_src sh :dir .. :results output :exports results :noweb yes
-nix search nixpkgs/nixos-<<get("nixos-latest")>>#wezterm | ansifilter
+nix search nixpkgs/nixos-<<get("nixos-latest")>>#wezterm ^ | ansifilter
 #+end_src
 
 #+RESULTS: nix-search-remote-wezterm
@@ -441,7 +441,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+: /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -470,7 +470,7 @@ nix path-info .#<<get("package-attr-short")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+: /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 ** Running commands in a shell
 
@@ -580,7 +580,7 @@ search=:
 
 #+name: nix-search-details
 #+begin_src sh :dir .. :results output :exports both :noweb yes :post crop(text=*this*, first-n=5, last-n=0)
-nix search --json .#<<get("run-attr-short")>> | jq .
+nix search --json .#<<get("run-attr-short")>> ^ | jq .
 #+end_src
 
 #+RESULTS: nix-search-details
@@ -632,7 +632,7 @@ nix shell --ignore-environment \
 #+end_src
 
 #+RESULTS: nix-shell-remote
-: /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller/bin/bluos-controller
+: /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake
 references.
@@ -679,11 +679,11 @@ nix profile list --profile /tmp/nix-profile | ansifilter
 #+end_src
 
 #+RESULTS: nix-profile-list
-: Index:              0
+: Name:               bluos-controller
 : Flake attribute:    packages.x86_64-linux.bluos-controller
 : Original flake URL: git+file:///home/shajra/src/bluos-nix
 : Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-: Store paths:        /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+: Store paths:        /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from
 this list:

@@ -177,7 +177,7 @@ For commands accepting installables as an argument, if none are provided, then `
 We can use the `nix search` command to see what package derivations a flake contains. For example, from the root directory of this project, we can execute:
 
 ```sh
-nix search .
+nix search . ^
 ```
 
     * packages.x86_64-linux.bluos-controller
@@ -186,7 +186,7 @@ nix search .
     * packages.x86_64-linux.default
       BluOS Controller 4.4.1 (non-free)
 
-If a flake has a lot of packages, you can pass regexes to prune down the search. Returned values will match all the regexes provided.
+We're required to pass regexes as final arguments to prune down the search. Above we've passed `^` to match everything and return all results.
 
 We can also search a remote repository for packages to install. For example, Nixpkgs is a central repository for Nix, providing several thousand packages. We can search the “nixpkgs-unstable” branch of [Nixpkgs' GitHub repository](https://github.com/NixOS/nixpkgs) for packages that match both “gpu|opengl|accel” and “terminal” as follows:
 
@@ -223,7 +223,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal | ansifilter
 If we're curious about what version of WezTerm is available in NixOS's latest release, we can specialize the installable we're searching as follows:
 
 ```sh
-nix search nixpkgs/nixos-24.11#wezterm
+nix search nixpkgs/nixos-24.11#wezterm ^
 ```
 
     * legacyPackages.x86_64-linux.wezterm (20240203-110809-5046fc22)
@@ -269,7 +269,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+    /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -291,7 +291,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+    /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -367,7 +367,7 @@ nix run .#bluos-controller  -- --help
 We can see some of the metadata of this package with the `--json` switch of `nix search`:
 
 ```sh
-nix search --json .#bluos-controller | jq .
+nix search --json .#bluos-controller ^ | jq .
 ```
 
     {
@@ -404,7 +404,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller/bin/bluos-controller
+    /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake references.
 
@@ -428,11 +428,11 @@ We can see this installation by querying what's been installed:
 nix profile list
 ```
 
-    Index:              0
+    Name:               bluos-controller
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/shajra/src/bluos-nix
     Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-    Store paths:        /nix/store/g0nafbxxvdynhqmwxzmyc7pc63xd7x5n-bluos-controller
+    Store paths:        /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
 If we want to uninstall a program from our profile, we do so by the index from this list:
 

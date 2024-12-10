@@ -4,7 +4,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1720440688,
-        "narHash": "sha256-N4RM9m8QENJXQAWb0bHeu0EMcsPoDmEVr3uL6JpIkds=",
+        "narHash": "sha256-oGh381dalNOjGgz/Mc8ZUWSDyQ3IxaHXwp2TXQJiUTY=",
         "type": "tarball",
         "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-MacOS.zip"
       },
@@ -17,7 +17,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1720103658,
-        "narHash": "sha256-Bhs4hfmly8mLCavka/porabOKp9B24VSYBuyqxArnfU=",
+        "narHash": "sha256-wTOVOH0Et4oaMwhmAYmppp2X9isIjqIzA6qenptdrlU=",
         "type": "tarball",
         "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/2024/07/BluOS-Controller-4.4.1-Windows.zip"
       },
@@ -87,11 +87,11 @@
         "ox-gfm": "ox-gfm"
       },
       "locked": {
-        "lastModified": 1733856679,
-        "narHash": "sha256-9EMjXNfT4xpigNoavzWaAdgXa+TrJAfuy4dF0Cqwz7Y=",
+        "lastModified": 1733862459,
+        "narHash": "sha256-YzJz2n/MFA7IO70JWTKJboooqOYrBPmxNeYgmVUgvsU=",
         "owner": "shajra",
         "repo": "nix-project",
-        "rev": "1d6db2fb282eb00661faf781271430e53144eb8a",
+        "rev": "36e094a1d03f630cb05d6b288ae285b5048adcf4",
         "type": "github"
       },
       "original": {
