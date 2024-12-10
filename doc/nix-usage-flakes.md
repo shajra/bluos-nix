@@ -434,16 +434,10 @@ nix profile list
     Locked flake URL:   git+file:///home/shajra/src/bluos-nix
     Store paths:        /nix/store/bgphwrpjdwnxh8q2mp5pqgmxmzaasnhz-bluos-controller
 
-If we want to uninstall a program from our profile, we do so by the index from this list:
+If we want to uninstall a program from our profile, we can reference it by name:
 
 ```sh
-nix profile remove 0
-```
-
-We can also provide a regex matching the full attribute path of the flake:
-
-```sh
-nix profile remove '.*bluos-controller'
+nix profile remove bluos-controller
 ```
 
 Also, if you look at the symlink-resolved location for your profile, you'll see that Nix retains the symlink trees of previous generations of your profile. You can even roll back to an earlier profile with the `nix profile rollback` subcommand. You can delete old generations of your profile with the `nix profile wipe-history` subcommand.

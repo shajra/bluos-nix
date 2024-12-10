@@ -87,11 +87,11 @@
         "ox-gfm": "ox-gfm"
       },
       "locked": {
-        "lastModified": 1733862459,
-        "narHash": "sha256-YzJz2n/MFA7IO70JWTKJboooqOYrBPmxNeYgmVUgvsU=",
+        "lastModified": 1733864201,
+        "narHash": "sha256-TusSmnQRwxnA/MmS4mr4TSazlCyZrqVHJTOI7Iimrcc=",
         "owner": "shajra",
         "repo": "nix-project",
-        "rev": "36e094a1d03f630cb05d6b288ae285b5048adcf4",
+        "rev": "fa94bdd29518a5e5305032bb932e0b58c168414b",
         "type": "github"
       },
       "original": {
