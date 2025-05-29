@@ -24,11 +24,9 @@
                 "x86_64-darwin"
                 "aarch64-darwin"
             ];
-            perSystem = { system, nixpkgs, ... }:
-                let build = import nixpkgs.stable.path {
-                        inherit system;
-                        overlays = [ config.flake.overlays.default ];
-                    };
+            perSystem = { nixpkgs, ... }:
+                let build = nixpkgs.stable.extend
+                        config.flake.overlays.default;
                 in {
                     packages.default = build.bluos-controller;
                     packages.bluos-controller = build.bluos-controller;
