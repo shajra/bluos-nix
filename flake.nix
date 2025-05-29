@@ -37,6 +37,7 @@
                         bluos-controller = {
                             type = "app";
                             program = "${build.bluos-controller}/bin/bluos-controller";
+                            inherit (build.bluos-controller) meta;
                         };
                     };
                     checks.ci         = build.bluos-controller;
