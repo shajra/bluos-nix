@@ -40,13 +40,9 @@ in stdenv.mkDerivation {
         ${replaceWithinPackagesJs "\\\"darwin\\\"" "\\\"linux\\\""}
         ${replaceWithinPackagesJs "\\\"MacOS\\\""  "\\\"Linux\\\""}
 
-        # DESIGN: 4.8.0: Within a function returning the upgrade URL
-        ${replaceWithinPackagesJs "desktop_app/osx/" "desktop_app/windows/"}
-
         # DESIGN: We want one deviation from Mac behavior of actually quitting
         # when all windows are closed.
         ${replaceWithinPackagesJs "&& ([a-z]+\\.quit\\(\\))" "|| \\1"}
-
     '';
     installPhase = ''
         mkdir --parents "$out"
