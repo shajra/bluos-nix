@@ -1,19 +1,21 @@
-{ bluos-controller-win-zip
-, stdenv
-, p7zip
+{
+  bluos-controller-win-zip,
+  stdenv,
+  p7zip,
 }:
-{ pname
-, version
+{
+  pname,
+  version,
 }:
 
 stdenv.mkDerivation {
-    pname = "${pname}-unexe";
-    inherit version;
-    src = bluos-controller-win-zip;
-    nativeBuildInputs = [ p7zip ];
-    phases = [ "unpackPhase" ];
-    unpackPhase = ''
-        mkdir "$out"
-        7zr x "$src" -o"$out"
-    '';
+  pname = "${pname}-unexe";
+  inherit version;
+  src = bluos-controller-win-zip;
+  nativeBuildInputs = [ p7zip ];
+  phases = [ "unpackPhase" ];
+  unpackPhase = ''
+    mkdir "$out"
+    7zr x "$src" -o"$out"
+  '';
 }
