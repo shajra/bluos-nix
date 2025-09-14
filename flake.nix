@@ -78,7 +78,7 @@
                 {
                   name = "project-doc-gen";
                   help = "generate GitHub Markdown from Org files";
-                  command = ''org2gfm-hermetic "$@"'';
+                  command = ''org2gfm "$@"'';
                 }
               ];
               packages = [
@@ -94,10 +94,12 @@
             };
             org2gfm = {
               settings = {
-                ignoreEnvironment = true;
-                keepEnvVars = [
+                envKeep = [
                   "LANG"
                   "LOCALE_ARCHIVE"
+                ];
+                pathKeep = [
+                  "nix"
                 ];
                 pathPackages = [
                   nixpkgs.stable.ansifilter
@@ -110,14 +112,11 @@
                   nixpkgs.stable.nixfmt-rfc-style
                   nixpkgs.stable.tree
                 ];
-                extraPaths = [
+                pathExtras = [
                   "/bin"
                 ];
-                pathIncludesActiveNix = true;
-                pathIncludesPrevious = false;
                 exclude = [
                   "internal"
-                  "examples"
                 ];
                 evaluate = true;
               };

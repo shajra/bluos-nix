@@ -22,13 +22,14 @@ in
 nix-project-lib.writeShellCheckedExe pname
   {
     inherit meta;
+    envCleaned = false;
+    pathCleaned = true;
     pathPackages = [
       bc
       coreutils
       daemon
       electron
     ];
-    pathIncludesPrevious = true;
   }
   ''
     set -eu
