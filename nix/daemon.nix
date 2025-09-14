@@ -24,6 +24,7 @@ nix-project-lib.writeShellCheckedExe pname
     inherit meta;
     envCleaned = false;
     pathCleaned = true;
+    pathKeep = [ "xrdb" ];
     pathPackages = [
       bc
       coreutils
@@ -34,9 +35,6 @@ nix-project-lib.writeShellCheckedExe pname
   ''
     set -eu
     set -o pipefail
-
-
-    . "${nix-project-lib.scriptCommon}/share/nix-project/common.sh"
 
 
     COMMAND=start
@@ -143,15 +141,6 @@ nix-project-lib.writeShellCheckedExe pname
         then stop_controller
         else start_controller
         fi
-    }
-
-    die()
-    {
-        {
-        print_usage
-        echo
-        echo "ERROR: $1"
-        } >&2
     }
 
 
