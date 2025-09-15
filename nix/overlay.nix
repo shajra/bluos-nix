@@ -24,5 +24,8 @@ withSystem system (
     bluos-controller-darwin-unpacked = final.callPackage ./undmg.nix { } meta;
     bluos-controller-darwin = final.callPackage ./darwin.nix { } meta;
     bluos-controller = final.callPackage bluos-controller { };
+    bluos-controller-checks = prev.linkFarm "bluos-controller-checks" {
+      inherit (final) bluos-controller;
+    };
   }
 )

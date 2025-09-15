@@ -56,7 +56,7 @@
                 inherit (build.bluos-controller) meta;
               };
             };
-            checks.ci = build.bluos-controller;
+            checks.build = build.bluos-controller-checks;
             legacyPackages.nixpkgs = build;
             devshells.default = {
               commands = [
