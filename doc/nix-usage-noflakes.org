@@ -309,7 +309,7 @@ nix-build --attr <<get("package-attr-long")>> .
 #+end_src
 
 #+RESULTS: nix-build
-: /nix/store/3bwmmrimw3aa9qmw5hlw0cpd4jcwwlzi-bluos-controller
+: /nix/store/cxls5dbpviwlcrql5vrmyg3idg94p1gx-bluos-controller
 
 If we omit the path to a Nix file, =nix-build= will try to build =default.nix=
 in the current directory. If we omit the =--attr= option and argument,
@@ -332,7 +332,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/3bwmmrimw3aa9qmw5hlw0cpd4jcwwlzi-bluos-controller
+: /nix/store/cxls5dbpviwlcrql5vrmyg3idg94p1gx-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -561,6 +561,7 @@ nix-env --profile /tmp/nix-profile \
 
 #+RESULTS: nix-env-install
 : installing 'bluos-controller'
+: building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 
 We can see this installation by querying what's been installed:
 
