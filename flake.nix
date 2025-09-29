@@ -2,10 +2,10 @@
   description = "BluOS Controller (non-free)";
 
   inputs = {
-    devshell.url = "github:numtide/devshell";
-    flake-parts.url = "github:hercules-ci/flake-parts";
     nix-project.url = "github:shajra/nix-project";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    devshell.follows = "nix-project/devshell";
+    flake-parts.follows = "nix-project/flake-parts";
+    treefmt-nix.follows = "nix-project/treefmt-nix";
     bluos-controller-win-zip = {
       url = "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-Windows.zip";
       flake = false;
