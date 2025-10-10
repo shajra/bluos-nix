@@ -3,27 +3,27 @@
     "bluos-controller-mac-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1750788532,
-        "narHash": "sha256-2BNFNqCcparFpz+P/NQXagaHz+X49bRUfU6YBOmixeg=",
+        "lastModified": 1759845470,
+        "narHash": "sha256-rE7PZUaxrIKSWY8gIiScjE/LXQ28VOsKbrDW4fWwQmY=",
         "type": "tarball",
-        "url": "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-MacOS.zip"
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-MacOS.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-MacOS.zip"
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-MacOS.zip"
       }
     },
     "bluos-controller-win-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1750779930,
-        "narHash": "sha256-P054JiPyMcnXrkD216hCAsK8UYvGumTpamJJK/4MQ4k=",
+        "lastModified": 1759843538,
+        "narHash": "sha256-+HSyGhGWf6AI8b7gnScUpjV3jJD2Q4KX7Pl1ioG8fzs=",
         "type": "tarball",
-        "url": "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-Windows.zip"
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-Windows.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-Windows.zip"
+        "url": "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-Windows.zip"
       }
     },
     "devshell": {

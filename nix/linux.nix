@@ -14,8 +14,8 @@ let
   # are typically patched in with substituteInPlace, which is what we're doing
   # below.  Regex pattern matching makes gives us some wiggle room in case the
   # minified variable name changes.
-  replaceWithinPackagesJs = replaced: replacement: ''
-    rg --type js --files-with-matches "${replaced}" packages \
+  replaceWithinAppJs = replaced: replacement: ''
+    rg --type js --files-with-matches "${replaced}" node_modules/@vite-electron-builder \
     | while read -r js
     do
         # DESIGN: Not using substituteInPlace to get regex matching.
@@ -38,17 +38,17 @@ stdenv.mkDerivation {
   unpackPhase = ''
     asar extract "$src/resources/app.asar" .
 
-    ${replaceWithinPackagesJs "[a-z]+\\.resourcesPath" "\\\"$out/resources\\\""}
+    ${replaceWithinAppJs "[a-z0-9$]+\\.resourcesPath" "\\\"$out/resources\\\""}
 
     # DESIGN: We're going to by default take all the logic for Macs as our
     # logic for Linux.
-    ${replaceWithinPackagesJs "\\\"linux\\\"" "\\\"_linux\\\""}
-    ${replaceWithinPackagesJs "\\\"darwin\\\"" "\\\"linux\\\""}
-    ${replaceWithinPackagesJs "\\\"MacOS\\\"" "\\\"Linux\\\""}
+    ${replaceWithinAppJs "\\\"linux\\\"" "\\\"_linux\\\""}
+    ${replaceWithinAppJs "\\\"darwin\\\"" "\\\"linux\\\""}
+    ${replaceWithinAppJs "\\\"MacOS\\\"" "\\\"Linux\\\""}
 
     # DESIGN: We want one deviation from Mac behavior of actually quitting
     # when all windows are closed.
-    ${replaceWithinPackagesJs "&& ([a-z]+\\.quit\\(\\))" "|| \\1"}
+    ${replaceWithinAppJs "stopApp\\(\\)" "stopApp(); app.quit(); process.exit(0)"}
   '';
   installPhase = ''
     mkdir --parents "$out"

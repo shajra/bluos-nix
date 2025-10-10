@@ -7,11 +7,11 @@
     flake-parts.follows = "nix-project/flake-parts";
     treefmt-nix.follows = "nix-project/treefmt-nix";
     bluos-controller-win-zip = {
-      url = "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-Windows.zip";
+      url = "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-Windows.zip";
       flake = false;
     };
     bluos-controller-mac-zip = {
-      url = "https://bluos.io/wp-content/uploads/2025/07/BluOS-Controller-4.10.0-MacOS.zip";
+      url = "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-4.12.0-MacOS.zip";
       flake = false;
     };
   };
@@ -20,7 +20,7 @@
     inputs@{ flake-parts, ... }:
     let
       meta.pname = "bluos-controller";
-      meta.version = "4.10.0";
+      meta.version = "4.12.0";
     in
     flake-parts.lib.mkFlake { inherit inputs; } (
       { withSystem, ... }:
