@@ -200,10 +200,10 @@ As discussed in a previous section, we can use the flakes registry identifier of
 nix search nixpkgs 'gpu|opengl|accel' terminal
 ```
 
-    * legacyPackages.x86_64-linux.alacritty (0.15.1)
+    * legacyPackages.x86_64-linux.alacritty (0.16.1)
       Cross-platform, GPU-accelerated terminal emulator
     
-    * legacyPackages.x86_64-linux.alacritty-graphics (0.15.1-graphics)
+    * legacyPackages.x86_64-linux.alacritty-graphics (0.16.1-graphics)
       Cross-platform, GPU-accelerated terminal emulator
     
     * legacyPackages.x86_64-linux.darktile (0.0.11)
@@ -270,7 +270,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/acw9q1v80gfbljp6mi3hkqwkx4ma0q55-bluos-controller
+    /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -292,7 +292,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/acw9q1v80gfbljp6mi3hkqwkx4ma0q55-bluos-controller
+    /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -405,7 +405,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/acw9q1v80gfbljp6mi3hkqwkx4ma0q55-bluos-controller/bin/bluos-controller
+    /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake references.
 
@@ -433,7 +433,7 @@ nix profile list
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/shajra/src/bluos-nix
     Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-    Store paths:        /nix/store/acw9q1v80gfbljp6mi3hkqwkx4ma0q55-bluos-controller
+    Store paths:        /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller
 
 If we want to uninstall a program from our profile, we can reference it by name:
 
