@@ -172,13 +172,13 @@ nix --experimental-features nix-command search --file . '' ^ | ansifilter
 #+RESULTS: nix-search-local
 #+begin_example
 ,* default
-  BluOS Controller 4.12.0 (non-free)
+  BluOS Controller 4.12.1 (non-free)
 
-,* packages.aarch64-darwin.bluos-controller (4.12.0)
+,* packages.aarch64-darwin.bluos-controller (4.12.1)
 
-,* packages.aarch64-darwin.default (4.12.0)
+,* packages.aarch64-darwin.default (4.12.1)
 
-,* packages.x86_64-darwin.bluos-controller (4.12.0)
+,* packages.x86_64-darwin.bluos-controller (4.12.1)
 
 …
 #+end_example
@@ -218,10 +218,10 @@ nix --experimental-features nix-command \
 
 #+RESULTS: nix-search-filtered
 : * packages.x86_64-linux.bluos-controller
-:   BluOS Controller 4.12.0 (non-free)
+:   BluOS Controller 4.12.1 (non-free)
 : 
 : * packages.x86_64-linux.default
-:   BluOS Controller 4.12.0 (non-free)
+:   BluOS Controller 4.12.1 (non-free)
 
 We can also use =--json= to get more details about found packages:
 
@@ -240,7 +240,7 @@ nix --experimental-features \
 #+begin_example
 {
   "default": {
-    "description": "BluOS Controller 4.12.0 (non-free)",
+    "description": "BluOS Controller 4.12.1 (non-free)",
     "pname": "bluos-controller",
     "version": ""
   },
@@ -290,7 +290,7 @@ nix --experimental-features 'nix-command' \
 #+RESULTS: nix-search-specific
 : {
 :   "packages.x86_64-linux.bluos-controller": {
-:     "description": "BluOS Controller 4.12.0 (non-free)",
+:     "description": "BluOS Controller 4.12.1 (non-free)",
 :     "pname": "bluos-controller",
 :     "version": ""
 :   }
@@ -309,7 +309,7 @@ nix-build --attr <<get("package-attr-long")>> .
 #+end_src
 
 #+RESULTS: nix-build
-: /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller
+: /nix/store/cck94di23fbq03bhjc0i6grhkgjn1cfl-bluos-controller
 
 If we omit the path to a Nix file, =nix-build= will try to build =default.nix=
 in the current directory. If we omit the =--attr= option and argument,
@@ -332,7 +332,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/lvhqpi3nx4ppc2rmv1491v8sc3h07l2c-bluos-controller
+: /nix/store/cck94di23fbq03bhjc0i6grhkgjn1cfl-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -443,7 +443,7 @@ nix --experimental-features \
 #+RESULTS: nix-search-run
 : {
 :   "": {
-:     "description": "BluOS Controller 4.12.0 (non-free)",
+:     "description": "BluOS Controller 4.12.1 (non-free)",
 :     "pname": "bluos-controller",
 :     "version": ""
 :   }
@@ -600,12 +600,12 @@ nix --experimental-features nix-command \
 #+begin_example
 {
   "packages.x86_64-linux.bluos-controller": {
-    "description": "BluOS Controller 4.12.0 (non-free)",
+    "description": "BluOS Controller 4.12.1 (non-free)",
     "pname": "bluos-controller",
     "version": ""
   },
   "packages.x86_64-linux.default": {
-    "description": "BluOS Controller 4.12.0 (non-free)",
+    "description": "BluOS Controller 4.12.1 (non-free)",
     "pname": "bluos-controller",
     "version": ""
   }
