@@ -19,5 +19,8 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir "$out"
     cp -r . "$out"
+
+    # DESIGN: broken symlink in packaging for some reason
+    unlink "$out/Applications"
   '';
 }
