@@ -348,7 +348,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal | ansifilter
 ,* legacyPackages.x86_64-linux.rio (0.2.37)
   Hardware-accelerated GPU terminal emulator powered by WebGPU
 
-,* legacyPackages.x86_64-linux.wezterm (0-unstable-2026-01-09)
+,* legacyPackages.x86_64-linux.wezterm (0-unstable-2026-01-17)
   GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust
 
 ,* legacyPackages.x86_64-linux.zutty (0.16-unstable-2024-08-18)
@@ -447,7 +447,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/zxml5wxczd6kn7x1kb8v0kh66sygrwnk-bluos-controller
+: /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -476,7 +476,7 @@ nix path-info .#<<get("package-attr-short")>>
 #+end_src
 
 #+results: nix-build-path
-: /nix/store/zxml5wxczd6kn7x1kb8v0kh66sygrwnk-bluos-controller
+: /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
 
 ** Running commands in a shell
 
@@ -638,7 +638,7 @@ nix shell --ignore-environment \
 #+end_src
 
 #+RESULTS: nix-shell-remote
-: /nix/store/zxml5wxczd6kn7x1kb8v0kh66sygrwnk-bluos-controller/bin/bluos-controller
+: /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake
 references.
@@ -689,7 +689,7 @@ nix profile list --profile /tmp/nix-profile | ansifilter
 : Flake attribute:    packages.x86_64-linux.bluos-controller
 : Original flake URL: git+file:///home/shajra/src/bluos-nix
 : Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-: Store paths:        /nix/store/zxml5wxczd6kn7x1kb8v0kh66sygrwnk-bluos-controller
+: Store paths:        /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
 
 If we want to uninstall a program from our profile, we can reference it by name:
 
