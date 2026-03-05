@@ -166,7 +166,7 @@ We can build this package with `nix-build` from the project root:
 nix-build --attr packages.x86_64-linux.bluos-controller .
 ```
 
-    /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
+    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
 
 If we omit the path to a Nix file, `nix-build` will try to build `default.nix` in the current directory. If we omit the `--attr` option and argument, `nix-build` will try to build packages it finds in the root of the attribute tree.
 
@@ -178,7 +178,7 @@ The output of `nix-build` shows us where in `/nix/store` our package has been bu
 readlink result*
 ```
 
-    /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
+    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -309,6 +309,7 @@ To install the `bluos-controller` executable, which is provided by the `packages
 nix-env --install --file . --attr packages.x86_64-linux.bluos-controller 2>&1
 ```
 
+    …
     installing 'bluos-controller'
     building '/nix/store/hs9xz17vlb2m4qn6kxfmccgjq4jyrvqg-user-environment.drv'...
 

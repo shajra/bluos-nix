@@ -270,7 +270,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
+    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -292,7 +292,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
+    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -405,7 +405,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller/bin/bluos-controller
+    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake references.
 
@@ -433,7 +433,7 @@ nix profile list
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/shajra/src/bluos-nix
     Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-    Store paths:        /nix/store/2fl3jw6nixahf9fd15pmg5kf8chgw1nz-bluos-controller
+    Store paths:        /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
 
 If we want to uninstall a program from our profile, we can reference it by name:
 
