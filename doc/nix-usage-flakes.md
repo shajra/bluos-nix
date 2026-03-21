@@ -115,21 +115,21 @@ nix flake show .
     ├───apps
     │   ├───aarch64-darwin
     …
+    ├───devShells
+    │   ├───aarch64-darwin
+    │   │   └───default omitted (use '--all-systems' to show)
+    │   └───x86_64-linux
+    │       └───default: development environment 'devshell'
     ├───formatter
     │   ├───aarch64-darwin omitted (use '--all-systems' to show)
-    │   ├───x86_64-darwin omitted (use '--all-systems' to show)
     │   └───x86_64-linux: package 'treefmt'
     ├───legacyPackages
     │   ├───aarch64-darwin omitted (use '--legacy' to show)
-    │   ├───x86_64-darwin omitted (use '--legacy' to show)
     │   └───x86_64-linux omitted (use '--legacy' to show)
     ├───overlays
     │   └───default: Nixpkgs overlay
     └───packages
         ├───aarch64-darwin
-        │   ├───bluos-controller omitted (use '--all-systems' to show)
-        │   └───default omitted (use '--all-systems' to show)
-        ├───x86_64-darwin
         │   ├───bluos-controller omitted (use '--all-systems' to show)
         │   └───default omitted (use '--all-systems' to show)
         └───x86_64-linux
@@ -181,10 +181,10 @@ nix search . ^
 ```
 
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.12.2 (non-free)
+      BluOS Controller 4.14.0 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.12.2 (non-free)
+      BluOS Controller 4.14.0 (non-free)
 
 We're required to pass regexes as final arguments to prune down the search. Above we've passed `^` to match everything and return all results.
 
@@ -209,7 +209,7 @@ nix search nixpkgs 'gpu|opengl|accel' terminal
     * legacyPackages.x86_64-linux.darktile (0.0.11)
       GPU rendered terminal emulator designed for tiling window managers
     
-    * legacyPackages.x86_64-linux.kitty (0.45.0)
+    * legacyPackages.x86_64-linux.kitty (0.46.0)
       Fast, feature-rich, GPU based terminal emulator
     
     * legacyPackages.x86_64-linux.rio (0.2.37)
@@ -239,10 +239,10 @@ You may also notice that the Nixpkgs flake outputs packages under the `legacyPac
 The following result is one returned by our prior execution of `nix search .`:
 
     * packages.x86_64-linux.bluos-controller
-      BluOS Controller 4.12.2 (non-free)
+      BluOS Controller 4.14.0 (non-free)
     
     * packages.x86_64-linux.default
-      BluOS Controller 4.12.2 (non-free)
+      BluOS Controller 4.14.0 (non-free)
 
 We can see that a package can be accessed with the `packages.x86_64-linux.bluos-controller` output attribute path of the project's flake. Not shown in the search results above, this package happens to provide the executable `bin/bluos-controller`.
 
@@ -270,7 +270,7 @@ After a successful call of `nix build`, you'll see one or more symlinks for each
 readlink result*
 ```
 
-    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
+    /nix/store/qnc7d9jz4kyqi8zfayjz25baksvhj4ff-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
@@ -292,7 +292,7 @@ It's common to configure these “result” symlinks as ignored in source contro
 nix path-info .#bluos-controller
 ```
 
-    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
+    /nix/store/qnc7d9jz4kyqi8zfayjz25baksvhj4ff-bluos-controller
 
 ## Running commands in a shell<a id="sec-4-6"></a>
 
@@ -373,7 +373,7 @@ nix search --json .#bluos-controller ^ | jq .
 
     {
       "packages.x86_64-linux.bluos-controller": {
-        "description": "BluOS Controller 4.12.2 (non-free)",
+        "description": "BluOS Controller 4.14.0 (non-free)",
         "pname": "bluos-controller",
         "version": ""
     …
@@ -405,7 +405,7 @@ nix shell --ignore-environment \
     --command which bluos-controller
 ```
 
-    /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller/bin/bluos-controller
+    /nix/store/qnc7d9jz4kyqi8zfayjz25baksvhj4ff-bluos-controller/bin/bluos-controller
 
 What we do with local flake references can work just as well with remote flake references.
 
@@ -433,7 +433,7 @@ nix profile list
     Flake attribute:    packages.x86_64-linux.bluos-controller
     Original flake URL: git+file:///home/shajra/src/bluos-nix
     Locked flake URL:   git+file:///home/shajra/src/bluos-nix
-    Store paths:        /nix/store/q6c79809d4wf6ss2msg205xj8i0iiibd-bluos-controller
+    Store paths:        /nix/store/qnc7d9jz4kyqi8zfayjz25baksvhj4ff-bluos-controller
 
 If we want to uninstall a program from our profile, we can reference it by name:
 
