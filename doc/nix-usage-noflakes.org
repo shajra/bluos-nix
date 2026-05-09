@@ -309,7 +309,7 @@ nix-build --attr <<get("package-attr-long")>> .
 #+end_src
 
 #+RESULTS: nix-build
-: /nix/store/fd5428mmwkvk0h67n26qyvqhm8paa40r-bluos-controller
+: /nix/store/afi4cafkbrxp67mz4sfid56gdhn63y7m-bluos-controller
 
 If we omit the path to a Nix file, =nix-build= will try to build =default.nix=
 in the current directory. If we omit the =--attr= option and argument,
@@ -332,7 +332,7 @@ readlink result*
 #+end_src
 
 #+RESULTS: nix-build-link
-: /nix/store/fd5428mmwkvk0h67n26qyvqhm8paa40r-bluos-controller
+: /nix/store/afi4cafkbrxp67mz4sfid56gdhn63y7m-bluos-controller
 
 Following these symlinks, we can see the files the project provides:
 
