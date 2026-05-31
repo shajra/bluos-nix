@@ -1,7 +1,7 @@
 {
+  asar,
   bluos-controller-linux-unpacked,
   ripgrep,
-  nodePackages,
   stdenv,
 }:
 {
@@ -28,8 +28,8 @@ stdenv.mkDerivation {
   inherit version;
   src = bluos-controller-linux-unpacked;
   nativeBuildInputs = [
+    asar
     ripgrep
-    nodePackages.asar
   ];
   phases = [
     "unpackPhase"
