@@ -5,7 +5,6 @@
 #+link: electron https://electronjs.org
 #+link: fhs https://www.pathname.com/fhs/
 #+link: flake-compat https://github.com/edolstra/flake-compat
-#+link: garnix https://garnix.io
 #+link: nix https://nixos.org/nix
 #+link: nix-guide-language https://nixos.org/guides/nix-language.html
 #+link: nix-learn https://nixos.org/learn.html

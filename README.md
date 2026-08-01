@@ -7,8 +7,6 @@
 
 [![img](https://github.com/shajra/bluos-nix/workflows/CI/badge.svg)](https://github.com/shajra/bluos-nix/actions)
 
-[![img](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fshajra%2Fbluos-nix%3Fbranch%3Dmain)](https://garnix.io/repo/shajra/bluos-nix)
-
 # About this project<a id="sec-1"></a>
 
 This project provides a [Nix package manager](https://nixos.org/nix) expression to repackage the proprietary [BluOS Controller](https://bluos.net) for Linux and Macs. BluOS is software for managing digital/streaming music bundled with various music streamers and amplifiers.
