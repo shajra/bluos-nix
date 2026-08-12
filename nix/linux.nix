@@ -14,13 +14,15 @@ let
   # are typically patched in with substituteInPlace, which is what we're doing
   # below.  Regex pattern matching makes gives us some wiggle room in case the
   # minified variable name changes.
+  appJsPath = "node_modules/@app/main/dist";
+
   replaceWithinAppJs = replaced: replacement: ''
-    rg --type js --files-with-matches "${replaced}" node_modules/@vite-electron-builder \
-    | while read -r js
+    while IFS= read -r js
     do
+        test -n "$js" || continue
         # DESIGN: Not using substituteInPlace to get regex matching.
-        sed --in-place --regexp-extended "s#${replaced}#${replacement}#g" $js
-    done
+        sed --in-place --regexp-extended "s#${replaced}#${replacement}#g" "$js"
+    done <<< "$(rg --type js --files-with-matches "${replaced}" ${appJsPath} || true)"
   '';
 in
 stdenv.mkDerivation {
@@ -38,17 +40,19 @@ stdenv.mkDerivation {
   unpackPhase = ''
     asar extract "$src/resources/app.asar" .
 
+    test -d ${appJsPath}
+
     ${replaceWithinAppJs "[a-z0-9$]+\\.resourcesPath" "\\\"$out/resources\\\""}
+
+    # DESIGN: 4.16.0 moved the window-close behavior from stopApp() into this
+    # platform check. Keep Linux quitting even after the Darwin-to-Linux rewrite.
+    ${replaceWithinAppJs "if \\(platform !== \\\"darwin\\\"\\) app\\.quit\\(\\);" "app.quit(); process.exit(0);"}
 
     # DESIGN: We're going to by default take all the logic for Macs as our
     # logic for Linux.
     ${replaceWithinAppJs "\\\"linux\\\"" "\\\"_linux\\\""}
     ${replaceWithinAppJs "\\\"darwin\\\"" "\\\"linux\\\""}
     ${replaceWithinAppJs "\\\"MacOS\\\"" "\\\"Linux\\\""}
-
-    # DESIGN: We want one deviation from Mac behavior of actually quitting
-    # when all windows are closed.
-    ${replaceWithinAppJs "stopApp\\(\\)" "stopApp(); app.quit(); process.exit(0)"}
   '';
   installPhase = ''
     mkdir --parents "$out"
